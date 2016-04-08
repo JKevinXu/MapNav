@@ -11,6 +11,9 @@
 #import "ItemStore.h"
 #import "ImageStore.h"
 #import "DetailViewController.h"
+#import "MapNavViewController.h"
+
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -21,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [GMSServices provideAPIKey:@"AIzaSyDOfNDNoAsy1Q3SlKmjzkK_hHyTy5odCRY"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -44,7 +48,13 @@
    [[UINavigationController alloc] initWithRootViewController:ivc];
     
     // Use the Navigation controller as the top-level view controller in the app
-    self.window.rootViewController = navController;
+    
+    
+
+    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+    UITabBarController *tvc = [[UITabBarController alloc] init];
+    tvc.viewControllers = @[navController, mapNavViewController];
+    self.window.rootViewController = tvc;
     
     
     [self.window makeKeyAndVisible];
