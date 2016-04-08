@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF2342531C49A8A0000A6AB1 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342521C49A8A0000A6AB1 /* Item.m */; };
+		AF2342561C49AEDC000A6AB1 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342551C49AEDC000A6AB1 /* ItemStore.m */; };
+		AF2342591C49D086000A6AB1 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342581C49D086000A6AB1 /* ItemCell.m */; };
+		AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF23425A1C49D164000A6AB1 /* ItemCell.xib */; };
+		AF2342611C4B53C9000A6AB1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23425F1C4B53C9000A6AB1 /* DetailViewController.m */; };
+		AF2342621C4B53C9000A6AB1 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2342601C4B53C9000A6AB1 /* DetailViewController.xib */; };
+		AF2342681C4C7D85000A6AB1 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342671C4C7D85000A6AB1 /* ImageStore.m */; };
 		AF6CF8B41C499CEE00B1477B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B31C499CEE00B1477B /* main.m */; };
 		AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B61C499CEE00B1477B /* AppDelegate.m */; };
-		AF6CF8BA1C499CEE00B1477B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B91C499CEE00B1477B /* ViewController.m */; };
-		AF6CF8BD1C499CEE00B1477B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6CF8BB1C499CEE00B1477B /* Main.storyboard */; };
 		AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6CF8BE1C499CEE00B1477B /* Images.xcassets */; };
 		AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF6CF8C01C499CEE00B1477B /* LaunchScreen.xib */; };
 		AF6CF8CE1C499CEE00B1477B /* HomepwnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8CD1C499CEE00B1477B /* HomepwnerTests.m */; };
+		AF6CF8D91C49A03D00B1477B /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +33,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF6CF8AE1C499CEE00B1477B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2342511C49A8A0000A6AB1 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = ../Item.h; sourceTree = "<group>"; };
+		AF2342521C49A8A0000A6AB1 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = ../Item.m; sourceTree = "<group>"; };
+		AF2342541C49AEDC000A6AB1 /* ItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
+		AF2342551C49AEDC000A6AB1 /* ItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
+		AF2342571C49D086000A6AB1 /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		AF2342581C49D086000A6AB1 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
+		AF23425A1C49D164000A6AB1 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		AF23425E1C4B53C9000A6AB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		AF23425F1C4B53C9000A6AB1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		AF2342601C4B53C9000A6AB1 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		AF2342631C4C7CE4000A6AB1 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
+		AF2342671C4C7D85000A6AB1 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageStore.m; path = ../ImageStore.m; sourceTree = "<group>"; };
+		AF6CF8AE1C499CEE00B1477B /* MapNav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapNav.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6CF8B21C499CEE00B1477B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6CF8B31C499CEE00B1477B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF6CF8B51C499CEE00B1477B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF6CF8B61C499CEE00B1477B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AF6CF8B81C499CEE00B1477B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AF6CF8B91C499CEE00B1477B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AF6CF8BC1C499CEE00B1477B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF6CF8BE1C499CEE00B1477B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF6CF8C11C499CEE00B1477B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AF6CF8C71C499CEE00B1477B /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF6CF8C71C499CEE00B1477B /* MapNav.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapNav.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6CF8CC1C499CEE00B1477B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6CF8CD1C499CEE00B1477B /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
+		AF6CF8D71C49A03D00B1477B /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
+		AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +80,8 @@
 		AF6CF8A51C499CEE00B1477B = {
 			isa = PBXGroup;
 			children = (
-				AF6CF8B01C499CEE00B1477B /* Homepwner */,
-				AF6CF8CA1C499CEE00B1477B /* HomepwnerTests */,
+				AF6CF8B01C499CEE00B1477B /* MapNav */,
+				AF6CF8CA1C499CEE00B1477B /* MapNavTests */,
 				AF6CF8AF1C499CEE00B1477B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,25 +89,36 @@
 		AF6CF8AF1C499CEE00B1477B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF6CF8AE1C499CEE00B1477B /* Homepwner.app */,
-				AF6CF8C71C499CEE00B1477B /* HomepwnerTests.xctest */,
+				AF6CF8AE1C499CEE00B1477B /* MapNav.app */,
+				AF6CF8C71C499CEE00B1477B /* MapNav.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF6CF8B01C499CEE00B1477B /* Homepwner */ = {
+		AF6CF8B01C499CEE00B1477B /* MapNav */ = {
 			isa = PBXGroup;
 			children = (
 				AF6CF8B51C499CEE00B1477B /* AppDelegate.h */,
 				AF6CF8B61C499CEE00B1477B /* AppDelegate.m */,
-				AF6CF8B81C499CEE00B1477B /* ViewController.h */,
-				AF6CF8B91C499CEE00B1477B /* ViewController.m */,
-				AF6CF8BB1C499CEE00B1477B /* Main.storyboard */,
+				AF6CF8D71C49A03D00B1477B /* ItemsViewController.h */,
+				AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */,
+				AF23425E1C4B53C9000A6AB1 /* DetailViewController.h */,
+				AF23425F1C4B53C9000A6AB1 /* DetailViewController.m */,
+				AF2342631C4C7CE4000A6AB1 /* ImageStore.h */,
+				AF2342671C4C7D85000A6AB1 /* ImageStore.m */,
+				AF2342601C4B53C9000A6AB1 /* DetailViewController.xib */,
+				AF2342541C49AEDC000A6AB1 /* ItemStore.h */,
+				AF2342551C49AEDC000A6AB1 /* ItemStore.m */,
+				AF2342511C49A8A0000A6AB1 /* Item.h */,
+				AF2342521C49A8A0000A6AB1 /* Item.m */,
+				AF2342571C49D086000A6AB1 /* ItemCell.h */,
+				AF23425A1C49D164000A6AB1 /* ItemCell.xib */,
+				AF2342581C49D086000A6AB1 /* ItemCell.m */,
 				AF6CF8BE1C499CEE00B1477B /* Images.xcassets */,
 				AF6CF8C01C499CEE00B1477B /* LaunchScreen.xib */,
 				AF6CF8B11C499CEE00B1477B /* Supporting Files */,
 			);
-			path = Homepwner;
+			path = MapNav;
 			sourceTree = "<group>";
 		};
 		AF6CF8B11C499CEE00B1477B /* Supporting Files */ = {
@@ -102,13 +130,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AF6CF8CA1C499CEE00B1477B /* HomepwnerTests */ = {
+		AF6CF8CA1C499CEE00B1477B /* MapNavTests */ = {
 			isa = PBXGroup;
 			children = (
 				AF6CF8CD1C499CEE00B1477B /* HomepwnerTests.m */,
 				AF6CF8CB1C499CEE00B1477B /* Supporting Files */,
 			);
-			path = HomepwnerTests;
+			path = MapNavTests;
 			sourceTree = "<group>";
 		};
 		AF6CF8CB1C499CEE00B1477B /* Supporting Files */ = {
@@ -122,9 +150,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF6CF8AD1C499CEE00B1477B /* Homepwner */ = {
+		AF6CF8AD1C499CEE00B1477B /* MapNav */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF6CF8D11C499CEE00B1477B /* Build configuration list for PBXNativeTarget "Homepwner" */;
+			buildConfigurationList = AF6CF8D11C499CEE00B1477B /* Build configuration list for PBXNativeTarget "MapNav" */;
 			buildPhases = (
 				AF6CF8AA1C499CEE00B1477B /* Sources */,
 				AF6CF8AB1C499CEE00B1477B /* Frameworks */,
@@ -134,14 +162,14 @@
 			);
 			dependencies = (
 			);
-			name = Homepwner;
+			name = MapNav;
 			productName = Homepwner;
-			productReference = AF6CF8AE1C499CEE00B1477B /* Homepwner.app */;
+			productReference = AF6CF8AE1C499CEE00B1477B /* MapNav.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AF6CF8C61C499CEE00B1477B /* HomepwnerTests */ = {
+		AF6CF8C61C499CEE00B1477B /* MapNavTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF6CF8D41C499CEE00B1477B /* Build configuration list for PBXNativeTarget "HomepwnerTests" */;
+			buildConfigurationList = AF6CF8D41C499CEE00B1477B /* Build configuration list for PBXNativeTarget "MapNavTests" */;
 			buildPhases = (
 				AF6CF8C31C499CEE00B1477B /* Sources */,
 				AF6CF8C41C499CEE00B1477B /* Frameworks */,
@@ -152,9 +180,9 @@
 			dependencies = (
 				AF6CF8C91C499CEE00B1477B /* PBXTargetDependency */,
 			);
-			name = HomepwnerTests;
+			name = MapNavTests;
 			productName = HomepwnerTests;
-			productReference = AF6CF8C71C499CEE00B1477B /* HomepwnerTests.xctest */;
+			productReference = AF6CF8C71C499CEE00B1477B /* MapNav.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -163,11 +191,12 @@
 		AF6CF8A61C499CEE00B1477B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Jian (Kevin) Xu";
 				TargetAttributes = {
 					AF6CF8AD1C499CEE00B1477B = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 4ZVS4WVRN5;
 					};
 					AF6CF8C61C499CEE00B1477B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -175,7 +204,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF6CF8A91C499CEE00B1477B /* Build configuration list for PBXProject "Homepwner" */;
+			buildConfigurationList = AF6CF8A91C499CEE00B1477B /* Build configuration list for PBXProject "MapNav" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -188,8 +217,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF6CF8AD1C499CEE00B1477B /* Homepwner */,
-				AF6CF8C61C499CEE00B1477B /* HomepwnerTests */,
+				AF6CF8AD1C499CEE00B1477B /* MapNav */,
+				AF6CF8C61C499CEE00B1477B /* MapNavTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,9 +228,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6CF8BD1C499CEE00B1477B /* Main.storyboard in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
+				AF2342621C4B53C9000A6AB1 /* DetailViewController.xib in Resources */,
+				AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +249,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6CF8BA1C499CEE00B1477B /* ViewController.m in Sources */,
+				AF2342591C49D086000A6AB1 /* ItemCell.m in Sources */,
+				AF2342531C49A8A0000A6AB1 /* Item.m in Sources */,
 				AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */,
+				AF6CF8D91C49A03D00B1477B /* ItemsViewController.m in Sources */,
 				AF6CF8B41C499CEE00B1477B /* main.m in Sources */,
+				AF2342561C49AEDC000A6AB1 /* ItemStore.m in Sources */,
+				AF2342611C4B53C9000A6AB1 /* DetailViewController.m in Sources */,
+				AF2342681C4C7D85000A6AB1 /* ImageStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,20 +273,12 @@
 /* Begin PBXTargetDependency section */
 		AF6CF8C91C499CEE00B1477B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AF6CF8AD1C499CEE00B1477B /* Homepwner */;
+			target = AF6CF8AD1C499CEE00B1477B /* MapNav */;
 			targetProxy = AF6CF8C81C499CEE00B1477B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AF6CF8BB1C499CEE00B1477B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AF6CF8BC1C499CEE00B1477B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AF6CF8C01C499CEE00B1477B /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +311,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -347,9 +375,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Homepwner/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/MapNav/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MapNav;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -357,9 +388,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Homepwner/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/MapNav/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MapNav;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -375,10 +409,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = HomepwnerTests/Info.plist;
+				INFOPLIST_FILE = MapNavTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homepwner.app/Homepwner";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kevin.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = MapNav;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapNav.app/MapNav";
 			};
 			name = Debug;
 		};
@@ -390,17 +425,18 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = HomepwnerTests/Info.plist;
+				INFOPLIST_FILE = MapNavTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homepwner.app/Homepwner";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kevin.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = MapNav;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapNav.app/MapNav";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF6CF8A91C499CEE00B1477B /* Build configuration list for PBXProject "Homepwner" */ = {
+		AF6CF8A91C499CEE00B1477B /* Build configuration list for PBXProject "MapNav" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF6CF8CF1C499CEE00B1477B /* Debug */,
@@ -409,21 +445,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF6CF8D11C499CEE00B1477B /* Build configuration list for PBXNativeTarget "Homepwner" */ = {
+		AF6CF8D11C499CEE00B1477B /* Build configuration list for PBXNativeTarget "MapNav" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF6CF8D21C499CEE00B1477B /* Debug */,
 				AF6CF8D31C499CEE00B1477B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		AF6CF8D41C499CEE00B1477B /* Build configuration list for PBXNativeTarget "HomepwnerTests" */ = {
+		AF6CF8D41C499CEE00B1477B /* Build configuration list for PBXNativeTarget "MapNavTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF6CF8D51C499CEE00B1477B /* Debug */,
 				AF6CF8D61C499CEE00B1477B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

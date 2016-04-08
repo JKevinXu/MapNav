@@ -1,6 +1,6 @@
 //
-//  HomepwnerTests.m
-//  HomepwnerTests
+//  MapNavTests.m
+//  MapNavTests
 //
 //  Created by XuJian on 1/15/16.
 //  Copyright (c) 2016 Jian (Kevin) Xu. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface HomepwnerTests : XCTestCase
+@interface MapNavTests : XCTestCase
 
 @end
 
-@implementation HomepwnerTests
+@implementation MapNavTests
 
 - (void)setUp {
     [super setUp];

@@ -1,12 +1,16 @@
 //
 //  AppDelegate.m
-//  Homepwner
+//  MapNav
 //
 //  Created by XuJian on 1/15/16.
 //  Copyright (c) 2016 Jian (Kevin) Xu. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "ItemsViewController.h"
+#import "ItemStore.h"
+#import "ImageStore.h"
+#import "DetailViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    // Create an item store
+    ItemStore *itemStore = [[ItemStore alloc] init];
+    
+    // Create the image store
+    ImageStore *imageStore = [[ImageStore alloc] init];
+    
+    // Create an ItemViewController
+//    ItemsViewController *ivc = [[ItemsViewController alloc] initWithItemStore: imageStore];
+    ItemsViewController *ivc = [[ItemsViewController alloc] initWithItemStore:itemStore
+                                                                   imageStore:imageStore];
+    
+    // Use the ItemViewController as the top-level view controller in the app
+    self.window.rootViewController = ivc;
+    
+    // Create a navigation controller and add the itemsviewcontroller to it
+    UINavigationController *navController =
+   [[UINavigationController alloc] initWithRootViewController:ivc];
+    
+    // Use the Navigation controller as the top-level view controller in the app
+    self.window.rootViewController = navController;
+    
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

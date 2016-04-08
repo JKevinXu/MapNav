@@ -1,15 +1,13 @@
 //
-//  ViewController.h
-//  Homepwner
+//  ItemCell.m
+//  MapNav
 //
 //  Created by XuJian on 1/15/16.
 //  Copyright (c) 2016 Jian (Kevin) Xu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ItemCell.h"
 
-@interface ViewController : UIViewController
-
+@implementation ItemCell
 
 @end
-
