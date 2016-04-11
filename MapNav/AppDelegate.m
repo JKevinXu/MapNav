@@ -26,6 +26,7 @@
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyDOfNDNoAsy1Q3SlKmjzkK_hHyTy5odCRY"];
     
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -41,7 +42,7 @@
                                                                    imageStore:imageStore];
     
     // Use the ItemViewController as the top-level view controller in the app
-    self.window.rootViewController = ivc;
+//    self.window.rootViewController = ivc;
     
     // Create a navigation controller and add the itemsviewcontroller to it
     UINavigationController *navController =
@@ -52,12 +53,13 @@
     
 
     MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
-    UITabBarController *tvc = [[UITabBarController alloc] init];
-    tvc.viewControllers = @[navController, mapNavViewController];
-    self.window.rootViewController = tvc;
-    
+//    UITabBarController *tvc = [[UITabBarController alloc] init];
+//    tvc.viewControllers = @[mapNavViewController, navController];
+//    self.window.rootViewController = tvc;
+    self.window.rootViewController = mapNavViewController;
     
     [self.window makeKeyAndVisible];
+     
     
     return YES;
 }

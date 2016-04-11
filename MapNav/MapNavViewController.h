@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class locationAuthorizationManager;
 
 @interface MapNavViewController : UIViewController
 
 @property (strong, nonatomic) UIWindow *window;
+
 
 @end

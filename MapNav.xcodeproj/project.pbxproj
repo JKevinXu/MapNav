@@ -23,6 +23,7 @@
 		AF6CF8D91C49A03D00B1477B /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */; };
 		AF74173E1CB79A2000F71CB5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AF74173D1CB79A2000F71CB5 /* Podfile */; };
 		AF7417411CB79E5200F71CB5 /* MapNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7417401CB79E5200F71CB5 /* MapNavViewController.m */; };
+		AF7417431CB8602400F71CB5 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7417421CB8602400F71CB5 /* car.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		AF74173D1CB79A2000F71CB5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavViewController.h; sourceTree = "<group>"; };
 		AF7417401CB79E5200F71CB5 /* MapNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavViewController.m; sourceTree = "<group>"; };
+		AF7417421CB8602400F71CB5 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
 		BE9281669EF92827AFE57B12 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EF905B0376CD021D69456E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 		AF6CF8B01C499CEE00B1477B /* MapNav */ = {
 			isa = PBXGroup;
 			children = (
+				AF7417421CB8602400F71CB5 /* car.png */,
 				AF6CF8B51C499CEE00B1477B /* AppDelegate.h */,
 				AF6CF8B61C499CEE00B1477B /* AppDelegate.m */,
 				AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */,
@@ -263,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7417431CB8602400F71CB5 /* car.png in Resources */,
 				AF74173E1CB79A2000F71CB5 /* Podfile in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
