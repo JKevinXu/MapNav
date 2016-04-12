@@ -102,7 +102,7 @@
     self.buttonSendResponse.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
     self.buttonSendResponse.layer.cornerRadius = 4.0f;
     self.buttonSendResponse.layer.masksToBounds = YES;
-    [self.buttonSendResponse addTarget:self action:@selector(presentSendResponse) forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonSendResponse addTarget:self action:@selector(presentSendResponse:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonSendResponse.showsTouchWhenHighlighted = YES;
     [self.view addSubview:self.buttonSendResponse];
 }
@@ -160,6 +160,29 @@
         _buttonUserSendResponse.showsTouchWhenHighlighted = YES;
     }
     return _buttonUserSendResponse;
+}
+
+- (IBAction)presentSendResponse:(id)sender {
+//    MLProductDescriptionViewController *productDescriptionViewController = [[[NSBundle mainBundle]loadNibNamed:@"MLProductDescriptionViewController" owner:nil options:NULL] firstObject];
+    
+    // Create an item store
+    ItemStore *itemStore = [[ItemStore alloc] init];
+    
+    // Create the image store
+    ImageStore *imageStore = [[ImageStore alloc] init];
+    
+    ItemsViewController *itemsViewController = [[ItemsViewController alloc] initWithItemStore:itemStore
+                                                                   imageStore:imageStore];
+    
+//    itemsViewController = [[[NSBundle mainBundle]loadNibNamed:@"DetailViewController" owner:nil options:NULL] firstObject];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+//    [productDescriptionViewController setupViewComponenetsForProductData:self.productData];
+    UINavigationController *navController =
+    [[UINavigationController alloc] initWithRootViewController:itemsViewController];
+
+    [self.navigationController pushViewController:navController animated:YES];
 }
 
 - (IBAction)showMarker:(id)sender {

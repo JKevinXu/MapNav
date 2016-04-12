@@ -1,6 +1,6 @@
 //
 //  DetailViewController.h
-//  MapNav
+//  Homepwner
 //
 //  Created by XuJian on 1/16/16.
 //  Copyright (c) 2016 Jian (Kevin) Xu. All rights reserved.
@@ -10,8 +10,7 @@
 @class Item;
 @class ImageStore;
 
-// @interface DetailViewController : UIViewController
 @interface DetailViewController : UIViewController
-    <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+    <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 - (instancetype) initWithItem:(Item *)item imageStore:(ImageStore *)imgStore;
 @end
