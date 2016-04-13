@@ -7,22 +7,31 @@
 //
 
 #import "DetailViewController.h"
+#import "MapNavViewController.h"
 #import "Item.h"
 #import "ImageStore.h"
+#import <GoogleMaps/GoogleMaps.h>
+
+@import GoogleMaps;
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
-@property (weak, nonatomic) IBOutlet UITextField *valueField;
+@property (weak, nonatomic) IBOutlet UITextField *longitudeField;
+@property (weak, nonatomic) IBOutlet UITextField *latitudeField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (nonatomic) CLLocationManager *locationAuthorizationManager;
 
-@property (nonatomic) Item *item;
+// @property (nonatomic) Item *item;
 @property (nonatomic) ImageStore *imageStore;
 @end
 
-@implementation DetailViewController
+@implementation DetailViewController {
+   GMSMapView *mapView_;
+   BOOL firstLocationUpdate_;
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -68,7 +77,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self presentViewController:ipc animated:YES completion:nil];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     // Clear first responder
@@ -77,16 +86,31 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // Update the item with the text field contents
     self.item.name = self.nameField.text;
     self.item.serialNumber = self.serialNumberField.text;
-    self.item.valueInDollars = [self.valueField.text intValue];
-    
-    // Display the items image, if there is one for it in the image store
-    UIImage *itemImage = [self.imageStore imageForKey:self.item.itemKey];
-    self.imageView.image = itemImage;
-    
+    self.item.longitude = [self.longitudeField.text doubleValue];
+    self.item.latitude = [self.latitudeField.text doubleValue];
 }
+
+// do a mapViewController and use the 
 - (IBAction)pictureButtonPressed:(UIBarButtonItem *)sender {
     [self takePicture];
+//    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+//    CLLocation *myLocation = [mapNavViewController getLocationForNewMarker];
+    
+    CLLocation *myLocation = mapView_.myLocation;
+
+    //    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(myLocation.coordinate.latitude, myLocation.coordinate.longitude);
+    
+    // store position in the array.
+    self.item.longitude = myLocation.coordinate.longitude;
+    self.item.latitude = myLocation.coordinate.latitude;
+    
+    // update location in the box.
+    self.longitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.longitude];
+    self.latitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.latitude];
 }
+
 
 
 
@@ -96,8 +120,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // import values from the current item to the UI
     self.nameField.text = self.item.name;
     self.serialNumberField.text = self.item.serialNumber;
-    self.valueField.text =
-    [NSString stringWithFormat:@"%d", self.item.valueInDollars];
+    self.longitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.longitude];
+    self.latitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.latitude];
     
     // represent the date created legibly
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -105,6 +131,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     self.dateLabel.text = [dateFormatter stringFromDate:self.item.dateCreated];
     
+    // Display the items image, if there is one for it in the image store
+    UIImage *itemImage = [self.imageStore imageForKey:self.item.itemKey];
+    self.imageView.image = itemImage;
 }
 
 
@@ -123,6 +152,27 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38.5382
+                                                            longitude:-121.7617
+                                                                 zoom:40];
+    
+    
+    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.myLocationEnabled = YES;
+    
+    /*
+    // Listen to the myLocation property of GMSMapView.
+    [mapView_ addObserver:self
+               forKeyPath:@"myLocation"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+    
+    */
+    
+    // Ask for My Location data after the map has already been added to the UI.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        mapView_.myLocationEnabled = YES;
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,5 +189,58 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)enableMyLocation
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    if (status == kCLAuthorizationStatusNotDetermined)
+        [self requestLocationAuthorization];
+    else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
+        return; // we weren't allowed to show the user's location so don't enable
+    else
+        [mapView_ setMyLocationEnabled:YES];
+}
+
+// Ask the CLLocationManager for location authorization,
+// and be sure to retain the manager somewhere on the class
+
+- (void)requestLocationAuthorization
+{
+    _locationAuthorizationManager = [[CLLocationManager alloc] init];
+    _locationAuthorizationManager.delegate = self;
+    
+    [_locationAuthorizationManager requestAlwaysAuthorization];
+}
+
+// Handle the authorization callback. This is usually
+// called on a background thread so go back to main.
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status != kCLAuthorizationStatusNotDetermined) {
+        [self performSelectorOnMainThread:@selector(enableMyLocation) withObject:nil waitUntilDone:[NSThread isMainThread]];
+        
+        _locationAuthorizationManager.delegate = nil;
+        _locationAuthorizationManager = nil;
+    }
+}
+
+#pragma mark - KVO updates
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if (!firstLocationUpdate_) {
+        // If the first location update has not yet been recieved, then jump to that
+        // location.
+        firstLocationUpdate_ = YES;
+        CLLocation *location = [change objectForKey:NSKeyValueChangeNewKey];
+        mapView_.camera = [GMSCameraPosition cameraWithTarget:location.coordinate
+                                                         zoom:14];
+    }
+}
+
 
 @end

@@ -53,11 +53,11 @@
     
 
     MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
-//    UITabBarController *totalViewController = [[UITabBarController alloc] init];
-//    totalViewController.viewControllers = @[mapNavViewController, navController];
-//    self.window.rootViewController = totalViewController;
+    UITabBarController *totalViewController = [[UITabBarController alloc] init];
+    totalViewController.viewControllers = @[mapNavViewController, navController];
+    self.window.rootViewController = totalViewController;
     
-    self.window.rootViewController = navController;
+//    self.window.rootViewController = navController;
     
     [self.window makeKeyAndVisible];
      

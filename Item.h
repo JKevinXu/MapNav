@@ -7,14 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MapNavViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface Item : NSObject
+
+@interface Item : NSObject <NSCoding>
 
 @property (nonatomic, strong) Item *containedItem;
 @property (nonatomic, weak) Item *container;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *serialNumber;
+@property (nonatomic) CLLocationCoordinate2D *location;
+@property (nonatomic) double longitude;
+@property (nonatomic) double latitude;
 @property (nonatomic) int valueInDollars;
 @property (nonatomic, readonly, strong) NSDate *dateCreated;
 
@@ -23,9 +29,12 @@
 + (instancetype)randomItem;
 
 - (instancetype)initWithName:(NSString *)name
-              valueInDollars:(int)value
+                   longitude:(double) longitude
+                    latitude:(double) latitude
                 serialNumber:(NSString *)sNumber NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithName:(NSString *)name;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end

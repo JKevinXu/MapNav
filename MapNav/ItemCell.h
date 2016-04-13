@@ -13,5 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageViewMarker;
+// @property (weak, nonatomic) IBOutlet UILabel *markLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPutMarkerInMap;
 
 @end

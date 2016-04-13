@@ -75,7 +75,7 @@
     [addButton setTitle:@"Mark Parking" forState:UIControlStateNormal];
     
     // link the button with the marking adding and deletion.
-    [addButton addTarget:self action:@selector(showMarker:) forControlEvents:UIControlEventTouchUpInside];
+    [addButton addTarget:self action:@selector(showCarMarker:) forControlEvents:UIControlEventTouchUpInside];
     [mapView_ addSubview:addButton];
     
     // Add another button as clean marker.
@@ -146,6 +146,12 @@
     }
 }
 
+- (CLLocation *)getLocationForNewMarker {
+    [self enableMyLocation];
+    [self viewDidLoad];    
+    return self.mapView_.myLocation;
+}
+
 
 - (UIButton *)buttonUserSendResponse {
     if (!_buttonUserSendResponse) {
@@ -183,6 +189,26 @@
     [[UINavigationController alloc] initWithRootViewController:itemsViewController];
 
     [self.navigationController pushViewController:navController animated:YES];
+}
+
+- (IBAction)showCarMarker:(id)sender {
+    // Do the marker function
+    CLLocation *myLocation = mapView_.myLocation;
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(myLocation.coordinate.latitude, myLocation.coordinate.longitude);
+    GMSMarker *carMarker = [GMSMarker markerWithPosition:position];
+    carMarker.title = @"Your car is here";
+    UIImage *carIcon = [UIImage imageNamed:@"car.png"];
+    CGSize sacleSize = CGSizeMake(20, 20);
+    UIGraphicsBeginImageContextWithOptions(sacleSize, NO, 0.0);
+    [carIcon drawInRect:CGRectMake(0, 0, sacleSize.width, sacleSize.height)];
+    UIImage * resizedCarIcon = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    carMarker.icon = resizedCarIcon;
+    carMarker.opacity = 0.6;
+    carMarker.flat = YES;
+    
+    carMarker.map = mapView_;
 }
 
 - (IBAction)showMarker:(id)sender {

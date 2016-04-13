@@ -12,11 +12,14 @@
 #import "ItemCell.h"
 #import "DetailViewController.h"
 #import "ImageStore.h"
+#import "MapNavViewController.h"
 
 @interface ItemsViewController ()
 
 @property (nonatomic) ItemStore *itemStore;
+// @property (nonatomic) (double) *longitude;
 @property (nonatomic) ImageStore *imageStore;
+@property (nonatomic) UIButton *buttonSendResponse;
 
 // - (instancetype) initWithItem:(Item *)item imageStore:(ImageStore *)imageStore;
 // - (instancetype) initWithItemStore: imageStore;
@@ -82,6 +85,13 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.itemStore.allItems.count;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -96,7 +106,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Item *item = self.itemStore.allItems[indexPath.row];
     cell.nameLabel.text = item.name;
     cell.serialNumberLabel.text = item.serialNumber;
-    cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+    
+    UIImage *itemImage = [self.imageStore imageForKey:item.itemKey];
+    cell.imageViewMarker.image = itemImage;
+    
+    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+    
+//    [cell.buttonPutMarkerInMap addTarget:mapNavViewController action:@selector(showMarker:) forControlEvents:UIControlEventTouchUpInside];
+    DetailViewController *detailViewController= [[DetailViewController alloc] init];
+    
+    double longitude = detailViewController.item.longitude;
+    double latitude = detailViewController.item.latitude;
+    
+    [mapNavViewController showMarker:cell.buttonPutMarkerInMap
+                     withMarkerImage:itemImage
+                       withLongitude:(double)longitude
+                        withLatitude:(double)latitude];
     
     return cell;
     
@@ -110,6 +135,29 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Register this nib as the template for new ItemCells
     [self.tableView registerNib:itemCellNib forCellReuseIdentifier:@"ItemCell"];
+    
+    UIButton *buttonSendResponse = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    buttonSendResponse.frame = CGRectMake(80, 300, 100, 40);
+    buttonSendResponse.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+
+    
+    [buttonSendResponse setTitle:NSLocalizedString(@"Set Markers", nil) forState:UIControlStateNormal];
+    [buttonSendResponse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    buttonSendResponse.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
+    buttonSendResponse.layer.cornerRadius = 4.0f;
+    buttonSendResponse.layer.masksToBounds = YES;
+    
+    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+//    [buttonSendResponse addTarget:mapNavViewController action:@selector(helloWorld:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [mapNavViewController showMarker:buttonSendResponse];
+    
+    buttonSendResponse.showsTouchWhenHighlighted = YES;
+    [self.view addSubview:buttonSendResponse];
+}
+
+- (IBAction)helloWorld:(id)sender {
+    NSLog(@"Hello World!");
 }
 
 - (IBAction)addNewItem:(id)sender {

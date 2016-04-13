@@ -7,9 +7,11 @@
 //
 
 #import "Item.h"
+#import "MapNavViewController.h"
 
 @implementation Item
 
+/*
 + (instancetype)randomItem
 {
     // Create an immutable array of three adjectives
@@ -39,25 +41,29 @@
     
     // Institiate the new item with the random values
     Item *newItem = [[self alloc] initWithName: randomName
-                                 valueInDollars: randomValue
                                   serialNumber: randomSerialNumber];
+    
     
     return newItem;
 }
 
+*/
+
 - (NSString *)description
 {
     NSString *descriptionString =
-    [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, reorder on %@",
+    [[NSString alloc] initWithFormat:@"%@ (%@): Location longitude $%f, latitude $%f, reorder on %@",
                         self.name,
                         self.serialNumber,
-                        self.valueInDollars,
+                        self.longitude,
+                        self.latitude,
                         self.dateCreated];
     return descriptionString;
 }
 
 - (instancetype)initWithName:(NSString *)name
-                valueInDollars:(int)value
+                   longitude:(double)longitude
+                    latitude:(double)latitude
                 serialNumber:(NSString *)sNumber
 {
     // Call teh superclass's designated initializer
@@ -68,7 +74,8 @@
     // Give the instance variable initial values
         _name = name;
         _serialNumber = sNumber;
-        _valueInDollars = value;
+        _longitude = longitude;
+        _latitude = latitude;
         // Set _dateCreated to the current date and time
         _dateCreated = [[NSDate alloc] init];
         _itemKey = [[NSUUID UUID] UUIDString];
@@ -78,17 +85,46 @@
     return self;
 }
 
+
 - (instancetype)initWithName:(NSString *)name
 {
     return[self initWithName:name
-              valueInDollars:0
+                   longitude:-121.7617
+                    latitude:38.5382
                 serialNumber:@""];
 }
+
 
 - (instancetype)init
 {
     return [self initWithName:@"Item"];
 }
+
+
+// MARK: - NSCoding
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
+    [aCoder encodeObject:self.itemKey forKey:@"itemKey"];
+    [aCoder encodeObject:self.serialNumber forKey:@"serialNumber"];
+    [aCoder encodeDouble:self.longitude forKey:@"longitude"];
+    [aCoder encodeDouble:self.latitude forKey:@"latitude"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _name = [aDecoder decodeObjectForKey:@"name"];
+        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _itemKey = [aDecoder decodeObjectForKey:@"itemKey"];
+        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _longitude = [aDecoder decodeDoubleForKey:@"longitude"];
+        _latitude = [aDecoder decodeDoubleForKey:@"latitude"];
+    }
+    return self;
+}
+
+
 
 
 @end
