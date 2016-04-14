@@ -17,11 +17,10 @@
 @property (nonatomic) CLLocation *myLocation;
 
 - (CLLocation *)getLocationForNewMarker;
-- (IBAction)showMarker:(id)sender
-       withMarkerImage:(UIImage *)itemImage
-         withLongitude:(double)longitude
-          withLatitude:(double)latitude;
 
+- (void)setMarkerWithMarkerImage:(UIImage *)markerItemImage
+                    withLongitude:(double)markerLongitude
+                     withLatitude:(double)markerLatitude;
 
 - (IBAction)showMarker:(id)sender;
 

@@ -24,12 +24,14 @@
 @property (nonatomic) UIButton *buttonSendResponse;
 @property (nonatomic) UIButton *buttonUserSendResponse;
 @property (nonatomic) CLLocationManager *locationAuthorizationManager;
+// @property (nonatomic) GMSMapView *mapView_;
 
 @end
 
 
 
 @implementation MapNavViewController {
+    
     GMSMapView *mapView_;
     BOOL firstLocationUpdate_;
 }
@@ -51,6 +53,7 @@
     mapView_.settings.myLocationButton = YES;
     mapView_.myLocationEnabled = YES;
     
+//    mapView_.delegate = self;
    
     
     // Listen to the myLocation property of GMSMapView.
@@ -61,6 +64,8 @@
    
     self.view = mapView_;
     
+//    [self.view addSubview: mapView_];
+
     // Ask for My Location data after the map has already been added to the UI.
     dispatch_async(dispatch_get_main_queue(), ^{
         mapView_.myLocationEnabled = YES;
@@ -105,6 +110,9 @@
     [self.buttonSendResponse addTarget:self action:@selector(presentSendResponse:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonSendResponse.showsTouchWhenHighlighted = YES;
     [self.view addSubview:self.buttonSendResponse];
+    
+    [self listSubviewsOfView: self.view];
+    
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -195,6 +203,7 @@
     // Do the marker function
     CLLocation *myLocation = mapView_.myLocation;
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(myLocation.coordinate.latitude, myLocation.coordinate.longitude);
+    NSLog(@"Location longitude $%f, latitude $%f", myLocation.coordinate.longitude, myLocation.coordinate.latitude);
     GMSMarker *carMarker = [GMSMarker markerWithPosition:position];
     carMarker.title = @"Your car is here";
     UIImage *carIcon = [UIImage imageNamed:@"car.png"];
@@ -211,24 +220,36 @@
     carMarker.map = mapView_;
 }
 
-- (IBAction)showMarker:(id)sender {
+- (void)setMarkerWithMarkerImage:(UIImage *)markerItemImage
+                    withLongitude:(double)markerLongitude
+                     withLatitude:(double)markerLatitude
+{
+    
+    // [self.navigationController popViewControllerAnimated:YES];
+
+//    [self viewDidLoad];
+//    [super viewDidLoad];
     // Do the marker function
-    CLLocation *myLocation = mapView_.myLocation;
-    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(myLocation.coordinate.latitude, myLocation.coordinate.longitude);
-    GMSMarker *carMarker = [GMSMarker markerWithPosition:position];
-    carMarker.title = @"Your car is here";
-    UIImage *carIcon = [UIImage imageNamed:@"car.png"];
-    CGSize sacleSize = CGSizeMake(20, 20);
+//    CLLocation *myLocation = mapView_.myLocation;
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerLatitude, markerLongitude);
+    GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
+    itemMarker.title = @"Your car is here";
+    NSLog(@"Location longitude $%f, latitude $%f", markerLongitude, markerLatitude);
+    
+    
+    UIImage *itemIcon = markerItemImage;
+    
+    CGSize sacleSize = CGSizeMake(40, 30);
     UIGraphicsBeginImageContextWithOptions(sacleSize, NO, 0.0);
-    [carIcon drawInRect:CGRectMake(0, 0, sacleSize.width, sacleSize.height)];
-    UIImage * resizedCarIcon = UIGraphicsGetImageFromCurrentImageContext();
+    [itemIcon drawInRect:CGRectMake(0, 0, sacleSize.width, sacleSize.height)];
+    UIImage * resizedItemIcon = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    carMarker.icon = resizedCarIcon;
-    carMarker.opacity = 0.6;
-    carMarker.flat = YES;
+    itemMarker.icon = resizedItemIcon;
+    itemMarker.opacity = 0.8;
+    itemMarker.flat = YES;
     
-    carMarker.map = mapView_;
+    itemMarker.map = mapView_;
 }
 
 - (IBAction) cleanMarker:(id)sender {
@@ -239,6 +260,26 @@
     [mapView_ removeObserver:self
                   forKeyPath:@"myLocation"
                      context:NULL];
+}
+
+- (void)listSubviewsOfView:(UIView *)view {
+    
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+    
+    // Return if there are no subviews
+    if ([subviews count] == 0) return; // COUNT CHECK LINE
+    
+    for (UIView *subview in subviews) {
+        
+        if (subview == mapView_) {
+           // Do what you want to do with the subview
+           NSLog(@"%@", subview);
+        }
+        
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
 }
 
 #pragma mark - KVO updates

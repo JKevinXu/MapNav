@@ -110,22 +110,33 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIImage *itemImage = [self.imageStore imageForKey:item.itemKey];
     cell.imageViewMarker.image = itemImage;
     
-    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
     
-//    [cell.buttonPutMarkerInMap addTarget:mapNavViewController action:@selector(showMarker:) forControlEvents:UIControlEventTouchUpInside];
-    DetailViewController *detailViewController= [[DetailViewController alloc] init];
+  
+    [cell.buttonPutMarkerInMap setTag:indexPath.row];
+//    [self setMarker:cell.buttonPutMarkerInMap];
     
-    double longitude = detailViewController.item.longitude;
-    double latitude = detailViewController.item.latitude;
-    
-    [mapNavViewController showMarker:cell.buttonPutMarkerInMap
-                     withMarkerImage:itemImage
-                       withLongitude:(double)longitude
-                        withLatitude:(double)latitude];
+    [cell.buttonPutMarkerInMap addTarget:self action:@selector(setMarker:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
     
 }
+
+- (IBAction)setMarker:(id)sender {
+//    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+//    VC1 *myVC1ref = (VC1 *)[self.tabBarController.viewControllers objectAtIndex:0];
+    
+     MapNavViewController *mapNavViewController = (MapNavViewController *)[self.tabBarController.viewControllers objectAtIndex:0];
+
+     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
+     Item *itemForCell = self.itemStore.allItems[indexPath.row];
+     double longitude = itemForCell.longitude;
+     double latitude = itemForCell.latitude;
+     UIImage *itemImage = [self.imageStore imageForKey:itemForCell.itemKey];
+     [mapNavViewController setMarkerWithMarkerImage:itemImage
+                                      withLongitude:longitude
+                                       withLatitude:latitude];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -150,7 +161,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
 //    [buttonSendResponse addTarget:mapNavViewController action:@selector(helloWorld:) forControlEvents:UIControlEventTouchUpInside];
     
-    [mapNavViewController showMarker:buttonSendResponse];
+//    [mapNavViewController showMarker:buttonSendResponse];
     
     buttonSendResponse.showsTouchWhenHighlighted = YES;
     [self.view addSubview:buttonSendResponse];
