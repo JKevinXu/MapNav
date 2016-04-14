@@ -24,6 +24,8 @@
 		AF7417431CB8602400F71CB5 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7417421CB8602400F71CB5 /* car.png */; };
 		AFB06EA71CBC87A60010BAFF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB06EA51CBC87A60010BAFF /* DetailViewController.m */; };
 		AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */; };
+		AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */; };
+		AFB06EB01CBFFBAC0010BAFF /* MarkerPlay.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		AF7417421CB8602400F71CB5 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
 		AFB06EA51CBC87A60010BAFF /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMarker.png; sourceTree = "<group>"; };
+		AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerPlay.png; sourceTree = "<group>"; };
 		BE9281669EF92827AFE57B12 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EF905B0376CD021D69456E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,7 +134,6 @@
 		AF6CF8B01C499CEE00B1477B /* MapNav */ = {
 			isa = PBXGroup;
 			children = (
-				AF7417421CB8602400F71CB5 /* car.png */,
 				AF6CF8B51C499CEE00B1477B /* AppDelegate.h */,
 				AF6CF8B61C499CEE00B1477B /* AppDelegate.m */,
 				AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */,
@@ -150,6 +153,9 @@
 				AF23425A1C49D164000A6AB1 /* ItemCell.xib */,
 				AF2342581C49D086000A6AB1 /* ItemCell.m */,
 				AF6CF8BE1C499CEE00B1477B /* Images.xcassets */,
+				AF7417421CB8602400F71CB5 /* car.png */,
+				AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */,
+				AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */,
 				AF6CF8C01C499CEE00B1477B /* LaunchScreen.xib */,
 				AF6CF8B11C499CEE00B1477B /* Supporting Files */,
 			);
@@ -267,10 +273,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7417431CB8602400F71CB5 /* car.png in Resources */,
+				AFB06EB01CBFFBAC0010BAFF /* MarkerPlay.png in Resources */,
 				AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */,
 				AF74173E1CB79A2000F71CB5 /* Podfile in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
+				AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */,
 				AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -129,12 +129,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
      Item *itemForCell = self.itemStore.allItems[indexPath.row];
-     double longitude = itemForCell.longitude;
-     double latitude = itemForCell.latitude;
+     double itemLongitude = itemForCell.longitude;
+     double itemLatitude = itemForCell.latitude;
+     NSString *itemName = itemForCell.name;
      UIImage *itemImage = [self.imageStore imageForKey:itemForCell.itemKey];
-     [mapNavViewController setMarkerWithMarkerImage:itemImage
-                                      withLongitude:longitude
-                                       withLatitude:latitude];
+    [mapNavViewController setMarkerWithItemName:itemName
+                                withMarkerImage:itemImage
+                                  withLongitude:itemLongitude
+                                   withLatitude:itemLatitude];
 }
 
 
@@ -145,8 +147,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UINib *itemCellNib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
     
     // Register this nib as the template for new ItemCells
-    [self.tableView registerNib:itemCellNib forCellReuseIdentifier:@"ItemCell"];
-    
+    [self.tableView registerNib:itemCellNib forCellReuseIdentifier:@"ItemCell"];    
+/*
     UIButton *buttonSendResponse = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     buttonSendResponse.frame = CGRectMake(80, 300, 100, 40);
     buttonSendResponse.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
@@ -158,13 +160,23 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     buttonSendResponse.layer.cornerRadius = 4.0f;
     buttonSendResponse.layer.masksToBounds = YES;
     
-    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+//    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
 //    [buttonSendResponse addTarget:mapNavViewController action:@selector(helloWorld:) forControlEvents:UIControlEventTouchUpInside];
     
 //    [mapNavViewController showMarker:buttonSendResponse];
     
     buttonSendResponse.showsTouchWhenHighlighted = YES;
     [self.view addSubview:buttonSendResponse];
+    
+    UIImage *image = [UIImage imageNamed:@"MapMarker.png"];
+    ImageStore *setImageSize = [[ImageStore alloc] init];
+    self.tabBarItem.image = [setImageSize imageWithImage:image scaledToSize:CGSizeMake(30, 30)];
+    
+    if (self){
+        self.tabBarItem.title = @"Set Markers";
+        self.tabBarItem.image = [UIImage imageNamed:@"MapMarker.png"];
+    }
+*/
 }
 
 - (IBAction)helloWorld:(id)sender {
@@ -211,6 +223,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         
     }
 }
+
 
 @end
 

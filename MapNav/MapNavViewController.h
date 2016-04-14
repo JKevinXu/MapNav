@@ -18,9 +18,10 @@
 
 - (CLLocation *)getLocationForNewMarker;
 
-- (void)setMarkerWithMarkerImage:(UIImage *)markerItemImage
-                    withLongitude:(double)markerLongitude
-                     withLatitude:(double)markerLatitude;
+- (void)setMarkerWithItemName:(NSString *)markerItemName
+              withMarkerImage:(UIImage *)markerItemImage
+                withLongitude:(double)markerItemLongitude
+                 withLatitude:(double)markerItemLatitude;
 
 - (IBAction)showMarker:(id)sender;
 

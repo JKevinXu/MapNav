@@ -100,7 +100,8 @@
     self.buttonSendResponse.numberOfLines = 0;
     self.buttonSendResponse.font = [UIFont boldSystemFontOfSize:16];
     self.buttonSendResponse.textAlignment = NSTextAlignmentCenter;
-*/
+
+
     _buttonSendResponse = [[UIButton alloc] initWithFrame:CGRectMake(100, 80, (ScreenWidth - 10 * 3) / 2.0, 40)];
     [self.buttonSendResponse setTitle:NSLocalizedString(@"Create Spots", nil) forState:UIControlStateNormal];
     [self.buttonSendResponse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -112,7 +113,7 @@
     [self.view addSubview:self.buttonSendResponse];
     
     [self listSubviewsOfView: self.view];
-    
+*/
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -220,9 +221,11 @@
     carMarker.map = mapView_;
 }
 
-- (void)setMarkerWithMarkerImage:(UIImage *)markerItemImage
-                    withLongitude:(double)markerLongitude
-                     withLatitude:(double)markerLatitude
+
+- (void)setMarkerWithItemName:(NSString *)markerItemName
+              withMarkerImage:(UIImage *)markerItemImage
+                withLongitude:(double)markerItemLongitude
+                 withLatitude:(double)markerItemLatitude
 {
     
     // [self.navigationController popViewControllerAnimated:YES];
@@ -231,10 +234,10 @@
 //    [super viewDidLoad];
     // Do the marker function
 //    CLLocation *myLocation = mapView_.myLocation;
-    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerLatitude, markerLongitude);
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerItemLatitude, markerItemLongitude);
     GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
-    itemMarker.title = @"Your car is here";
-    NSLog(@"Location longitude $%f, latitude $%f", markerLongitude, markerLatitude);
+    itemMarker.title = markerItemName;
+    NSLog(@"Location longitude $%f, latitude $%f", markerItemLongitude, markerItemLatitude);
     
     
     UIImage *itemIcon = markerItemImage;
@@ -297,6 +300,7 @@
                                                          zoom:14];
     }
 }
+
 
 
 @end
