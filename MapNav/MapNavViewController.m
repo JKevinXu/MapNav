@@ -13,17 +13,22 @@
 #import "DetailViewController.h"
 #import "MapNavViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "GMPInfoWindow.h"
 
 #define ScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
 #define ScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
 
 @import GoogleMaps;
 
-@interface MapNavViewController ()
+@interface MapNavViewController () <GMSMapViewDelegate>
 
 @property (nonatomic) UIButton *buttonSendResponse;
 @property (nonatomic) UIButton *buttonUserSendResponse;
 @property (nonatomic) CLLocationManager *locationAuthorizationManager;
+@property (nonatomic) NSString *markerItemName;
+@property (nonatomic) UIImage *markerItemImage;
+
+
 // @property (nonatomic) GMSMapView *mapView_;
 
 @end
@@ -38,7 +43,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38.5382
@@ -53,7 +57,7 @@
     mapView_.settings.myLocationButton = YES;
     mapView_.myLocationEnabled = YES;
     
-//    mapView_.delegate = self;
+    mapView_.delegate = self;
    
     
     // Listen to the myLocation property of GMSMapView.
@@ -92,28 +96,6 @@
     // link the button with the marking adding and deletion.
     [cleanButton addTarget:self action:@selector(cleanMarker:) forControlEvents:UIControlEventTouchUpInside];
     [mapView_ addSubview:cleanButton];
-    
-/*
-    // Add the Send Response Button.
-    self.buttonSendResponse = [[UIButton alloc] initWithFrame:CGRectMake(20, 500, screenWidth, 30)];
-    self.buttonSendResponse.text = @"MORE LIKE THIS";
-    self.buttonSendResponse.numberOfLines = 0;
-    self.buttonSendResponse.font = [UIFont boldSystemFontOfSize:16];
-    self.buttonSendResponse.textAlignment = NSTextAlignmentCenter;
-
-
-    _buttonSendResponse = [[UIButton alloc] initWithFrame:CGRectMake(100, 80, (ScreenWidth - 10 * 3) / 2.0, 40)];
-    [self.buttonSendResponse setTitle:NSLocalizedString(@"Create Spots", nil) forState:UIControlStateNormal];
-    [self.buttonSendResponse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.buttonSendResponse.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
-    self.buttonSendResponse.layer.cornerRadius = 4.0f;
-    self.buttonSendResponse.layer.masksToBounds = YES;
-    [self.buttonSendResponse addTarget:self action:@selector(presentSendResponse:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonSendResponse.showsTouchWhenHighlighted = YES;
-    [self.view addSubview:self.buttonSendResponse];
-    
-    [self listSubviewsOfView: self.view];
-*/
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -159,22 +141,6 @@
     [self enableMyLocation];
     [self viewDidLoad];    
     return self.mapView_.myLocation;
-}
-
-
-- (UIButton *)buttonUserSendResponse {
-    if (!_buttonUserSendResponse) {
-        _buttonUserSendResponse = [[UIButton alloc] initWithFrame:CGRectMake(10, ScreenHeight - 8 - 40, (ScreenWidth - 10 * 3) / 2.0, 40)];
-        [_buttonUserSendResponse setTitle:NSLocalizedString(@"Send Response", nil) forState:UIControlStateNormal];
-        [_buttonUserSendResponse.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-        [_buttonUserSendResponse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _buttonUserSendResponse.backgroundColor = [UIColor whiteColor];
-        _buttonUserSendResponse.layer.cornerRadius = 4.0f;
-        _buttonUserSendResponse.layer.masksToBounds = YES;
-        [_buttonUserSendResponse addTarget:self action:@selector(presentSendResponse) forControlEvents:UIControlEventTouchUpInside];
-        _buttonUserSendResponse.showsTouchWhenHighlighted = YES;
-    }
-    return _buttonUserSendResponse;
 }
 
 - (IBAction)presentSendResponse:(id)sender {
@@ -234,9 +200,14 @@
 //    [super viewDidLoad];
     // Do the marker function
 //    CLLocation *myLocation = mapView_.myLocation;
+    
+    self.markerItemName = markerItemName;
+    self.markerItemImage = markerItemImage;
+    
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerItemLatitude, markerItemLongitude);
     GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
     itemMarker.title = markerItemName;
+    itemMarker.snippet = @"Votes: 8";
     NSLog(@"Location longitude $%f, latitude $%f", markerItemLongitude, markerItemLatitude);
     
     
@@ -251,8 +222,21 @@
     itemMarker.icon = resizedItemIcon;
     itemMarker.opacity = 0.8;
     itemMarker.flat = YES;
-    
     itemMarker.map = mapView_;
+    itemMarker.tracksInfoWindowChanges = YES;
+}
+
+- (UIView *) mapView: (GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    
+    
+    GMPInfoWindow *infoWindow = [[[NSBundle mainBundle] loadNibNamed:@"InfoWindow"
+                                                               owner:self
+                                                             options:nil]
+                                 objectAtIndex:0];
+    infoWindow.markerName.text = self.markerItemName;
+    infoWindow.imageViewMarker.image = self.markerItemImage;
+    return infoWindow;
 }
 
 - (IBAction) cleanMarker:(id)sender {

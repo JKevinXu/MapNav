@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 @class locationAuthorizationManager;
 
-@interface MapNavViewController : UIViewController
+@interface MapNavViewController : UIViewController <GMSMapViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic) GMSMapView *mapView_;

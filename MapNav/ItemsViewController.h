@@ -11,7 +11,9 @@
 @class ItemStore;
 @class ImageStore;
 
-@interface ItemsViewController : UITableViewController
+@interface ItemsViewController : UITableViewController {
+    NSMutableDictionary *selectedIndexes;
+}
 
 - (instancetype)initWithItemStore:(ItemStore *)store imageStore:(ImageStore *)imageStore;
 // - (instancetype)initWithItemStore:(ItemStore *)imageStore;

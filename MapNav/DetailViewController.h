@@ -13,6 +13,7 @@
 // @interface DetailViewController : UIViewController
 @interface DetailViewController : UIViewController
     <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+
 - (instancetype) initWithItem:(Item *)item imageStore:(ImageStore *)imgStore;
 
 @property (nonatomic) Item *item;

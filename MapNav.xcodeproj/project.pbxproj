@@ -13,6 +13,9 @@
 		AF2342591C49D086000A6AB1 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342581C49D086000A6AB1 /* ItemCell.m */; };
 		AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF23425A1C49D164000A6AB1 /* ItemCell.xib */; };
 		AF2342681C4C7D85000A6AB1 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342671C4C7D85000A6AB1 /* ImageStore.m */; };
+		AF341F621CDAB6410094B07E /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF341F611CDAB6410094B07E /* InfoWindow.xib */; };
+		AF341F681CDADBA20094B07E /* InforWindowBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = AF341F671CDADBA20094B07E /* InforWindowBackground.png */; };
+		AF341F6A1CDB0CD00094B07E /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = AF341F691CDB0CD00094B07E /* like.png */; };
 		AF6CF8B41C499CEE00B1477B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B31C499CEE00B1477B /* main.m */; };
 		AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B61C499CEE00B1477B /* AppDelegate.m */; };
 		AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6CF8BE1C499CEE00B1477B /* Images.xcassets */; };
@@ -26,6 +29,7 @@
 		AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */; };
 		AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */; };
 		AFB06EB01CBFFBAC0010BAFF /* MarkerPlay.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */; };
+		AFB9C4731CD9C6F4000FE75E /* GMPInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9C4721CD9C6F4000FE75E /* GMPInfoWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,9 @@
 		AF23425E1C4B53C9000A6AB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		AF2342631C4C7CE4000A6AB1 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		AF2342671C4C7D85000A6AB1 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageStore.m; path = ../ImageStore.m; sourceTree = "<group>"; };
+		AF341F611CDAB6410094B07E /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
+		AF341F671CDADBA20094B07E /* InforWindowBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InforWindowBackground.png; sourceTree = "<group>"; };
+		AF341F691CDB0CD00094B07E /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		AF6CF8AE1C499CEE00B1477B /* MapNav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapNav.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6CF8B21C499CEE00B1477B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6CF8B31C499CEE00B1477B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,7 +69,7 @@
 		AF6CF8CD1C499CEE00B1477B /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
 		AF6CF8D71C49A03D00B1477B /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
-		AF74173D1CB79A2000F71CB5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		AF74173D1CB79A2000F71CB5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavViewController.h; sourceTree = "<group>"; };
 		AF7417401CB79E5200F71CB5 /* MapNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavViewController.m; sourceTree = "<group>"; };
 		AF7417421CB8602400F71CB5 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
@@ -70,6 +77,8 @@
 		AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMarker.png; sourceTree = "<group>"; };
 		AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerPlay.png; sourceTree = "<group>"; };
+		AFB9C4711CD9C6F4000FE75E /* GMPInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPInfoWindow.h; sourceTree = "<group>"; };
+		AFB9C4721CD9C6F4000FE75E /* GMPInfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPInfoWindow.m; sourceTree = "<group>"; };
 		BE9281669EF92827AFE57B12 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EF905B0376CD021D69456E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +154,11 @@
 				AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */,
 				AF2342631C4C7CE4000A6AB1 /* ImageStore.h */,
 				AF2342671C4C7D85000A6AB1 /* ImageStore.m */,
+				AF341F611CDAB6410094B07E /* InfoWindow.xib */,
+				AF341F691CDB0CD00094B07E /* like.png */,
+				AF341F671CDADBA20094B07E /* InforWindowBackground.png */,
+				AFB9C4711CD9C6F4000FE75E /* GMPInfoWindow.h */,
+				AFB9C4721CD9C6F4000FE75E /* GMPInfoWindow.m */,
 				AF2342541C49AEDC000A6AB1 /* ItemStore.h */,
 				AF2342551C49AEDC000A6AB1 /* ItemStore.m */,
 				AF2342511C49A8A0000A6AB1 /* Item.h */,
@@ -277,9 +291,12 @@
 				AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */,
 				AF74173E1CB79A2000F71CB5 /* Podfile in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
+				AF341F621CDAB6410094B07E /* InfoWindow.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
 				AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */,
+				AF341F681CDADBA20094B07E /* InforWindowBackground.png in Resources */,
 				AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */,
+				AF341F6A1CDB0CD00094B07E /* like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +366,7 @@
 				AF2342531C49A8A0000A6AB1 /* Item.m in Sources */,
 				AFB06EA71CBC87A60010BAFF /* DetailViewController.m in Sources */,
 				AF7417411CB79E5200F71CB5 /* MapNavViewController.m in Sources */,
+				AFB9C4731CD9C6F4000FE75E /* GMPInfoWindow.m in Sources */,
 				AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */,
 				AF6CF8D91C49A03D00B1477B /* ItemsViewController.m in Sources */,
 				AF6CF8B41C499CEE00B1477B /* main.m in Sources */,
@@ -473,6 +491,7 @@
 			baseConfigurationReference = F2EF905B0376CD021D69456E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/MapNav/Info.plist";
@@ -488,6 +507,7 @@
 			baseConfigurationReference = 2B8D3F2827970CE0A3C6A6A0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/MapNav/Info.plist";
