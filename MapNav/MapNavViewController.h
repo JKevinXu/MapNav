@@ -16,6 +16,7 @@
 @property (nonatomic) GMSMapView *mapView_;
 @property (nonatomic) CLLocation *myLocation;
 
+
 - (CLLocation *)getLocationForNewMarker;
 
 - (void)setMarkerWithItemName:(NSString *)markerItemName
@@ -24,5 +25,6 @@
                  withLatitude:(double)markerItemLatitude;
 
 - (IBAction)showMarker:(id)sender;
+- (IBAction)likeTapped:(id)sender;
 
 @end

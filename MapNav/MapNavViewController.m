@@ -27,13 +27,16 @@
 @property (nonatomic) CLLocationManager *locationAuthorizationManager;
 @property (nonatomic) NSString *markerItemName;
 @property (nonatomic) UIImage *markerItemImage;
-
+@property (nonatomic) BOOL *markerTapped;
+@property (nonatomic) BOOL cameraMoving;
+@property (nonatomic) BOOL idleAfterMovement;
+@property (strong, nonatomic) GMPInfoWindow *displayedInfoWindow;
+@property (strong, nonatomic) GMSMarker *currentlyTappedMarker;
+@property int serialNumber;
 
 // @property (nonatomic) GMSMapView *mapView_;
 
 @end
-
-
 
 @implementation MapNavViewController {
     
@@ -203,6 +206,7 @@
     
     self.markerItemName = markerItemName;
     self.markerItemImage = markerItemImage;
+    self.serialNumber = 0;  // the initial like is 0.
     
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerItemLatitude, markerItemLongitude);
     GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
@@ -226,6 +230,11 @@
     itemMarker.tracksInfoWindowChanges = YES;
 }
 
+
+#pragma mark - GoogleMaps Delegate using googleMap API. 
+// The infoWindow is a picture. No events can be triggered by tapped certainbutton in that.
+
+/*
 - (UIView *) mapView: (GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
 {
     
@@ -236,8 +245,107 @@
                                  objectAtIndex:0];
     infoWindow.markerName.text = self.markerItemName;
     infoWindow.imageViewMarker.image = self.markerItemImage;
+    
+    [infoWindow.buttonLike addTarget:infoWindow action:@selector(showCarMarker:) forControlEvents:UIControlEventTouchUpInside];
+    
     return infoWindow;
+    
 }
+*/
+
+
+#pragma mark - GoogleMaps Delegate
+// Since we want to display our custom info window when a marker is tapped, use this delegate method
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
+    
+    // A marker has been tapped, so set that state flag
+    self.markerTapped = YES;
+    
+    // If a marker has previously been tapped and stored in currentlyTappedMarker, then nil it out
+    if(self.currentlyTappedMarker) {
+        self.currentlyTappedMarker = nil;
+    }
+    
+    // make this marker our currently tapped marker
+    self.currentlyTappedMarker = marker;
+    
+    // if our custom info window is already being displayed, remove it and nil the object out
+    if([self.displayedInfoWindow isDescendantOfView:self.view]) {
+        [self.displayedInfoWindow removeFromSuperview];
+        self.displayedInfoWindow = nil;
+    }
+    
+    /* animate the camera to center on the currently tapped marker, which causes
+     mapView:didChangeCameraPosition: to be called */
+    GMSCameraUpdate *cameraUpdate = [GMSCameraUpdate setTarget:marker.position];
+    [mapView_ animateWithCameraUpdate:cameraUpdate];
+    
+    return YES;
+}
+
+- (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position{
+    // cameraMoving state flag to YES
+    if(self.markerTapped) {
+        self.cameraMoving = YES;
+    }
+    
+    //Move the custom info window with the map
+    CGPoint markerPoint = [mapView_.projection pointForCoordinate:self.currentlyTappedMarker.position];
+    CGRect frame = self.displayedInfoWindow.bounds;
+    frame.origin.y = markerPoint.y - self.displayedInfoWindow.frame.size.height - 15 ;
+    frame.origin.x = markerPoint.x - self.displayedInfoWindow.frame.size.width / 2;
+    self.displayedInfoWindow.frame = frame;
+}
+
+/* If the map is tapped on any non-marker coordinate, reset the currentlyTappedMarker and remove our
+ custom info window from self.view */
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    if(self.currentlyTappedMarker) {
+        self.currentlyTappedMarker = nil;
+    }
+    
+    if([self.displayedInfoWindow isDescendantOfView:self.view]) {
+        [self.displayedInfoWindow removeFromSuperview];
+        self.displayedInfoWindow = nil;
+    }
+}
+
+
+
+#pragma mark create infoWindow
+// This method gets called whenever the map was moving but has now stopped
+- (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position{
+    /* if we got here and a marker was tapped and our animate method was called, then it means we're ready
+     to show our custom info window */
+    if(self.markerTapped && self.cameraMoving) {
+        
+        // infosMarker = self.currentlyTappedMarker.userData;
+        
+        // reset our state first
+        self.cameraMoving = NO;
+        self.markerTapped = NO;
+        self.idleAfterMovement = YES;
+        
+        
+        //CREATE YOUR INFO WINDOW VIEW (CustomInfoWindow : UIView)and load it
+        self.displayedInfoWindow = [[[NSBundle mainBundle] loadNibNamed:@"InfoWindow" owner:self options:nil] objectAtIndex:0];
+        CGPoint markerPoint = [mapView_.projection pointForCoordinate:self.currentlyTappedMarker.position];
+        CGRect frame = self.displayedInfoWindow.bounds;
+        frame.origin.y = markerPoint.y - self.displayedInfoWindow.frame.size.height - 15;
+        frame.origin.x = markerPoint.x - self.displayedInfoWindow.frame.size.width / 2;
+        self.displayedInfoWindow.frame = frame;
+        
+        self.displayedInfoWindow.markerName.text = self.markerItemName;
+        self.displayedInfoWindow.imageViewMarker.image = self.markerItemImage;
+        self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
+        
+        [self.displayedInfoWindow.buttonLike addTarget:self action:@selector(likeTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [self.view addSubview:self.displayedInfoWindow];
+    }
+}
+
 
 - (IBAction) cleanMarker:(id)sender {
     [mapView_ clear];
@@ -283,6 +391,13 @@
         mapView_.camera = [GMSCameraPosition cameraWithTarget:location.coordinate
                                                          zoom:14];
     }
+}
+
+#pragma mark - Function of Like button in the infoWindow
+
+- (IBAction)likeTapped:(id)sender {
+    self.serialNumber ++;
+    self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
 }
 
 
