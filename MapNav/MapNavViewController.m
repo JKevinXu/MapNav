@@ -33,6 +33,7 @@
 @property (strong, nonatomic) GMPInfoWindow *displayedInfoWindow;
 @property (strong, nonatomic) GMSMarker *currentlyTappedMarker;
 @property int serialNumber;
+@property (nonatomic) NSMutableSet *markerSet;
 
 // @property (nonatomic) GMSMapView *mapView_;
 
@@ -99,6 +100,9 @@
     // link the button with the marking adding and deletion.
     [cleanButton addTarget:self action:@selector(cleanMarker:) forControlEvents:UIControlEventTouchUpInside];
     [mapView_ addSubview:cleanButton];
+    
+    
+    self.markerSet = [[NSMutableSet alloc] init];
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -211,7 +215,7 @@
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerItemLatitude, markerItemLongitude);
     GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
     itemMarker.title = markerItemName;
-    itemMarker.snippet = @"Votes: 8";
+    itemMarker.snippet = markerItemName;
     NSLog(@"Location longitude $%f, latitude $%f", markerItemLongitude, markerItemLatitude);
     
     
@@ -228,6 +232,10 @@
     itemMarker.flat = YES;
     itemMarker.map = mapView_;
     itemMarker.tracksInfoWindowChanges = YES;
+    
+    itemMarker.userData = @{@"serialNumber":[NSNumber numberWithInt:0]};  // used to store the serialNumber
+    
+    [self.markerSet addObject:itemMarker];
 }
 
 
@@ -337,8 +345,8 @@
         
         self.displayedInfoWindow.markerName.text = self.markerItemName;
         self.displayedInfoWindow.imageViewMarker.image = self.markerItemImage;
-        self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
-        
+        // self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
+        self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"]];
         [self.displayedInfoWindow.buttonLike addTarget:self action:@selector(likeTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -396,10 +404,27 @@
 #pragma mark - Function of Like button in the infoWindow
 
 - (IBAction)likeTapped:(id)sender {
-    self.serialNumber ++;
-    self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
+    NSNumber *displayedSerialNumber = [[NSNumber alloc] init];
+    NSLog(@"self.displayedInfoWindow.serialNumberLabel.text: %@", self.displayedInfoWindow.serialNumberLabel.text);
+    
+    displayedSerialNumber = [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"];
+    displayedSerialNumber = @([displayedSerialNumber integerValue] + 1);
+    self.currentlyTappedMarker.userData = @{@"serialNumber":displayedSerialNumber};
+    
+    /*  no need to travere the markerSetArray.
+    for(GMSMarker *marker in self.markerSet) {
+        NSLog(@"SetMarkerName: %@", marker.snippet);
+        NSLog(@"displayedInfoWindow.markerName: %@", self.displayedInfoWindow.markerName.text);
+        if ([marker.snippet isEqualToString: self.displayedInfoWindow.markerName.text]) {
+            displayedSerialNumber = [marker.userData objectForKey:@"serialNumber"];
+            displayedSerialNumber = @([displayedSerialNumber integerValue] + 1);
+            marker.userData = @{@"serialNumber":displayedSerialNumber};
+            break;
+        }
+    }
+    */
+    self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", displayedSerialNumber];
 }
-
 
 
 @end

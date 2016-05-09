@@ -66,7 +66,7 @@
                     latitude:(double)latitude
                 serialNumber:(NSString *)sNumber
 {
-    // Call teh superclass's designated initializer
+    // Call the superclass's designated initializer
     self = [super init];
     
     // Did the superclass's designated initilizer succeed?

@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewMarker;
 @property (weak, nonatomic) IBOutlet UIButton *buttonLike;
+@property int serialNumber;
 
 @end
