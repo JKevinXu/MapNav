@@ -25,6 +25,11 @@
 		AF74173E1CB79A2000F71CB5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AF74173D1CB79A2000F71CB5 /* Podfile */; };
 		AF7417411CB79E5200F71CB5 /* MapNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7417401CB79E5200F71CB5 /* MapNavViewController.m */; };
 		AF7417431CB8602400F71CB5 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7417421CB8602400F71CB5 /* car.png */; };
+		AF99FA1B1CE1377700641F07 /* RankItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */; };
+		AF99FA1F1CE13B4000641F07 /* rankIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF99FA1E1CE13B4000641F07 /* rankIcon.jpg */; };
+		AF99FA211CE13CAA00641F07 /* ActivityRank.png in Resources */ = {isa = PBXBuildFile; fileRef = AF99FA201CE13CAA00641F07 /* ActivityRank.png */; };
+		AF99FA231CE1474500641F07 /* RankItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF99FA221CE1474500641F07 /* RankItemCell.xib */; };
+		AF99FA261CE1488000641F07 /* RankItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF99FA251CE1488000641F07 /* RankItemCell.m */; };
 		AFB06EA71CBC87A60010BAFF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB06EA51CBC87A60010BAFF /* DetailViewController.m */; };
 		AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */; };
 		AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */; };
@@ -73,6 +78,13 @@
 		AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavViewController.h; sourceTree = "<group>"; };
 		AF7417401CB79E5200F71CB5 /* MapNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavViewController.m; sourceTree = "<group>"; };
 		AF7417421CB8602400F71CB5 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		AF99FA191CE1377700641F07 /* RankItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankItemsViewController.h; sourceTree = "<group>"; };
+		AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankItemsViewController.m; sourceTree = "<group>"; };
+		AF99FA1E1CE13B4000641F07 /* rankIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rankIcon.jpg; sourceTree = "<group>"; };
+		AF99FA201CE13CAA00641F07 /* ActivityRank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActivityRank.png; sourceTree = "<group>"; };
+		AF99FA221CE1474500641F07 /* RankItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankItemCell.xib; sourceTree = "<group>"; };
+		AF99FA241CE1488000641F07 /* RankItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankItemCell.h; sourceTree = "<group>"; };
+		AF99FA251CE1488000641F07 /* RankItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankItemCell.m; sourceTree = "<group>"; };
 		AFB06EA51CBC87A60010BAFF /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMarker.png; sourceTree = "<group>"; };
@@ -149,6 +161,8 @@
 				AF7417401CB79E5200F71CB5 /* MapNavViewController.m */,
 				AF6CF8D71C49A03D00B1477B /* ItemsViewController.h */,
 				AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */,
+				AF99FA191CE1377700641F07 /* RankItemsViewController.h */,
+				AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */,
 				AF23425E1C4B53C9000A6AB1 /* DetailViewController.h */,
 				AFB06EA51CBC87A60010BAFF /* DetailViewController.m */,
 				AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */,
@@ -166,10 +180,15 @@
 				AF2342571C49D086000A6AB1 /* ItemCell.h */,
 				AF23425A1C49D164000A6AB1 /* ItemCell.xib */,
 				AF2342581C49D086000A6AB1 /* ItemCell.m */,
+				AF99FA241CE1488000641F07 /* RankItemCell.h */,
+				AF99FA221CE1474500641F07 /* RankItemCell.xib */,
+				AF99FA251CE1488000641F07 /* RankItemCell.m */,
 				AF6CF8BE1C499CEE00B1477B /* Images.xcassets */,
 				AF7417421CB8602400F71CB5 /* car.png */,
 				AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */,
 				AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */,
+				AF99FA1E1CE13B4000641F07 /* rankIcon.jpg */,
+				AF99FA201CE13CAA00641F07 /* ActivityRank.png */,
 				AF6CF8C01C499CEE00B1477B /* LaunchScreen.xib */,
 				AF6CF8B11C499CEE00B1477B /* Supporting Files */,
 			);
@@ -286,10 +305,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF99FA1F1CE13B4000641F07 /* rankIcon.jpg in Resources */,
 				AF7417431CB8602400F71CB5 /* car.png in Resources */,
 				AFB06EB01CBFFBAC0010BAFF /* MarkerPlay.png in Resources */,
+				AF99FA211CE13CAA00641F07 /* ActivityRank.png in Resources */,
 				AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */,
 				AF74173E1CB79A2000F71CB5 /* Podfile in Resources */,
+				AF99FA231CE1474500641F07 /* RankItemCell.xib in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
 				AF341F621CDAB6410094B07E /* InfoWindow.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
@@ -365,6 +387,8 @@
 				AF2342591C49D086000A6AB1 /* ItemCell.m in Sources */,
 				AF2342531C49A8A0000A6AB1 /* Item.m in Sources */,
 				AFB06EA71CBC87A60010BAFF /* DetailViewController.m in Sources */,
+				AF99FA1B1CE1377700641F07 /* RankItemsViewController.m in Sources */,
+				AF99FA261CE1488000641F07 /* RankItemCell.m in Sources */,
 				AF7417411CB79E5200F71CB5 /* MapNavViewController.m in Sources */,
 				AFB9C4731CD9C6F4000FE75E /* GMPInfoWindow.m in Sources */,
 				AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */,

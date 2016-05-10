@@ -17,12 +17,8 @@
 @interface ItemsViewController ()
 
 @property (nonatomic) ItemStore *itemStore;
-// @property (nonatomic) (double) *longitude;
 @property (nonatomic) ImageStore *imageStore;
 @property (nonatomic) UIButton *buttonSendResponse;
-
-// - (instancetype) initWithItem:(Item *)item imageStore:(ImageStore *)imageStore;
-// - (instancetype) initWithItemStore: imageStore;
 
 @end
 

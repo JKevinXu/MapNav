@@ -32,12 +32,6 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQB-eZ-y6r">
-                        <rect key="frame" x="164" y="108" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fw-Kh-5iH">
                         <rect key="frame" x="303" y="120" width="50" height="40"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -45,29 +39,24 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="HQB-eZ-y6r" firstAttribute="top" secondItem="mqA-At-rC7" secondAttribute="topMargin" constant="100" id="6TO-me-bk1"/>
-                    <constraint firstItem="HQB-eZ-y6r" firstAttribute="centerX" secondItem="mqA-At-rC7" secondAttribute="centerX" id="EgR-Zp-2p5"/>
                     <constraint firstItem="cK2-At-S2P" firstAttribute="centerY" secondItem="mqA-At-rC7" secondAttribute="centerY" id="EwL-dB-IKl"/>
                     <constraint firstItem="aJl-Tn-b8j" firstAttribute="centerY" secondItem="mqA-At-rC7" secondAttribute="centerY" id="HAk-id-0XO"/>
                     <constraint firstAttribute="bottomMargin" secondItem="aJl-Tn-b8j" secondAttribute="bottom" constant="10" id="ICL-RE-1zl"/>
                     <constraint firstItem="cK2-At-S2P" firstAttribute="centerX" secondItem="mqA-At-rC7" secondAttribute="centerX" id="Xxk-3L-oNV"/>
-                    <constraint firstItem="HQB-eZ-y6r" firstAttribute="top" secondItem="mqA-At-rC7" secondAttribute="topMargin" constant="80" id="cu1-kl-CKt"/>
                     <constraint firstItem="aJl-Tn-b8j" firstAttribute="centerX" secondItem="mqA-At-rC7" secondAttribute="centerX" id="gHy-EM-hJa"/>
                     <constraint firstItem="aJl-Tn-b8j" firstAttribute="top" secondItem="mqA-At-rC7" secondAttribute="topMargin" constant="55" id="tOJ-el-tuq"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="cu1-kl-CKt"/>
                         <exclude reference="HAk-id-0XO"/>
                         <exclude reference="tOJ-el-tuq"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="buttonPutMarkerInMap" destination="8Fw-Kh-5iH" id="5h8-Mp-WRE"/>
-                <outlet property="imageViewMarker" destination="cK2-At-S2P" id="c6f-QS-mSQ"/>
-                <outlet property="nameLabel" destination="aJl-Tn-b8j" id="BzC-an-fga"/>
-                <outlet property="serialNumberLabel" destination="HQB-eZ-y6r" id="qLe-cb-878"/>
+                <outlet property="buttonPutMarkerInMap" destination="8Fw-Kh-5iH" id="PXQ-Vx-rm1"/>
+                <outlet property="imageViewMarker" destination="cK2-At-S2P" id="Qdo-g3-6yI"/>
+                <outlet property="nameLabel" destination="aJl-Tn-b8j" id="32R-Bd-puO"/>
             </connections>
             <point key="canvasLocation" x="440" y="248"/>
         </tableViewCell>

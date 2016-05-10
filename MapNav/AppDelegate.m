@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ItemsViewController.h"
+#import "RankItemsViewController.h"
 #import "ItemStore.h"
 #import "ImageStore.h"
 #import "DetailViewController.h"
@@ -37,62 +38,55 @@
     ImageStore *imageStore = [[ImageStore alloc] init];
     
     // Create an ItemViewController
-//    ItemsViewController *ivc = [[ItemsViewController alloc] initWithItemStore: imageStore];
     ItemsViewController *itemViewController = [[ItemsViewController alloc] initWithItemStore:itemStore
                                                                    imageStore:imageStore];
     
-    // Use the ItemViewController as the top-level view controller in the app
-//    self.window.rootViewController = ivc;
-    
-    // Create a navigation controller and add the itemsviewcontroller to it
+    // Create a navigation controller and add the itemsViewController to it
     UINavigationController *ItemNavController =
-   [[UINavigationController alloc] initWithRootViewController:itemViewController];
+    [[UINavigationController alloc] initWithRootViewController:itemViewController];
     
+    // Set the icon in UITabBar for itemViewController
+    UIImage *imageMarkerSet = [UIImage imageNamed:@"MapMarker.png"];
+    ImageStore *setImageSize_2 = [[ImageStore alloc] init];
+    UIImage *resizedImageMarkerSet = [setImageSize_2 imageWithImage:imageMarkerSet scaledToSize:CGSizeMake(30, 30)];
+    resizedImageMarkerSet = [resizedImageMarkerSet imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ItemNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Marker Set" image:resizedImageMarkerSet selectedImage:resizedImageMarkerSet];
+    
+    
+    
+    // Create an RankItemsViewController
+    RankItemsViewController *rankItemsViewController = [[RankItemsViewController alloc] initWithItemStore:itemStore
+               imageStore:imageStore];
+    // Create a navigation controller and add the RankItemsViewController to it
+    // UINavigationController *RankItemsNavController =
+    // [[UINavigationController alloc] initWithRootViewController:rankItemsViewController];
+    
+    // Set the icon in UITabBar for itemViewController
+    UIImage *imageRankTable = [UIImage imageNamed:@"ActivityRank.png"];
+    ImageStore *setImageSize_3 = [[ImageStore alloc] init];
+    UIImage *resizedImageRankTable = [setImageSize_3 imageWithImage:imageRankTable scaledToSize:CGSizeMake(30, 30)];
+    resizedImageRankTable = [resizedImageRankTable imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    rankItemsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Activity Rank" image:resizedImageRankTable selectedImage:resizedImageRankTable];
+    
+    
+    
+    // create mapNavViewController. Set its icon in UITabBar.
     MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
     
+    // UINavigationController *MapNavController =
+    // [[UINavigationController alloc] initWithRootViewController:mapNavViewController];
     
     UIImage *imageMapView = [UIImage imageNamed:@"MarkerPlay.png"];
     ImageStore *setImageSize = [[ImageStore alloc] init];
     UIImage *resizedImageMapView = [setImageSize imageWithImage:imageMapView scaledToSize:CGSizeMake(30, 30)];
     resizedImageMapView = [resizedImageMapView imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-//    UITabBarItem *item0 = [totalViewController.viewControllers objectAtIndex:0];
-    
     mapNavViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:resizedImageMapView selectedImage:resizedImageMapView];
     
     
-    UIImage *imageMarkerSet = [UIImage imageNamed:@"MapMarker.png"];
-    ImageStore *setImageSize_2 = [[ImageStore alloc] init];
-    UIImage *resizedImageMarkerSet = [setImageSize_2 imageWithImage:imageMarkerSet scaledToSize:CGSizeMake(30, 30)];
-    resizedImageMarkerSet = [resizedImageMarkerSet imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    //    UITabBarItem *item0 = [totalViewController.viewControllers objectAtIndex:0];
-    
-    ItemNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Marker Set" image:resizedImageMarkerSet selectedImage:resizedImageMarkerSet];
-    
     // Use the Navigation controller as the top-level view controller in the app
     UITabBarController *totalViewController = [[UITabBarController alloc] init];
-    totalViewController.viewControllers = @[mapNavViewController, ItemNavController];
+    totalViewController.viewControllers = @[mapNavViewController, ItemNavController, rankItemsViewController];
     self.window.rootViewController = totalViewController;
-    
-//     item0.title = @"MapView";
-//     [item0 setFinishedSelectedImage:image withFinishedUnselectedImage:image];
-    
-    /*
-     UIImage *image = [UIImage imageNamed:@"MarkerPlay.png"];
-     ImageStore *setImageSize = [[ImageStore alloc] init];
-     self.tabBarItem.image = [setImageSize imageWithImage:image scaledToSize:CGSizeMake(30, 30)];
-     
-     if (self){
-     self.tabBarItem.title = @"MapView";
-     self.tabBarItem.image = [UIImage imageNamed:@"MarkerPlay.png"];
-     }
-     */
-    
-    
-//    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
-    
-//    self.window.rootViewController = navController;
     
     [self.window makeKeyAndVisible];
      

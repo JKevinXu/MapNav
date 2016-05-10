@@ -8,6 +8,7 @@
 
 #import "MapNavViewController.h"
 #import "ItemsViewController.h"
+#import "RankItemsViewController.h"
 #import "ItemStore.h"
 #import "ImageStore.h"
 #import "DetailViewController.h"
@@ -33,7 +34,7 @@
 @property (strong, nonatomic) GMPInfoWindow *displayedInfoWindow;
 @property (strong, nonatomic) GMSMarker *currentlyTappedMarker;
 @property int serialNumber;
-@property (nonatomic) NSMutableSet *markerSet;
+@property (nonatomic) UIButton *buttonViewRank;
 
 // @property (nonatomic) GMSMapView *mapView_;
 
@@ -47,6 +48,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBarController.delegate = self;
+    self.firstMutable = [[NSMutableArray alloc] initWithObjects:@"item 1", @"item 2", nil];
+    
     CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38.5382
@@ -101,8 +105,32 @@
     [cleanButton addTarget:self action:@selector(cleanMarker:) forControlEvents:UIControlEventTouchUpInside];
     [mapView_ addSubview:cleanButton];
     
+    /*
+    // View rank Button.
+    UIButton *buttonViewRank = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    buttonViewRank.frame = CGRectMake(mapView_.bounds.size.width - 300, mapView_.bounds.size.height - 600, 200, 40);
+
+    CGRectMake(80, 100, 100, 40);
+    buttonViewRank.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
     
-    self.markerSet = [[NSMutableSet alloc] init];
+    [buttonViewRank setTitle:NSLocalizedString(@"Activity Rank", nil) forState:UIControlStateNormal];
+    [buttonViewRank setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    buttonViewRank.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
+    buttonViewRank.layer.cornerRadius = 4.0f;
+    buttonViewRank.layer.masksToBounds = YES;
+    
+    self.buttonViewRank = buttonViewRank;
+    
+    [buttonViewRank addTarget:self action:@selector(viewRank:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // [mapNavViewController showMarker:buttonSendResponse];
+    
+    self.buttonViewRank.showsTouchWhenHighlighted = YES;
+    [mapView_ addSubview:buttonViewRank];
+    */
+    
+    
+    self.markerArray = [[NSMutableArray alloc] init];
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -200,14 +228,6 @@
                 withLongitude:(double)markerItemLongitude
                  withLatitude:(double)markerItemLatitude
 {
-    
-    // [self.navigationController popViewControllerAnimated:YES];
-
-//    [self viewDidLoad];
-//    [super viewDidLoad];
-    // Do the marker function
-//    CLLocation *myLocation = mapView_.myLocation;
-    
     self.markerItemName = markerItemName;
     self.markerItemImage = markerItemImage;
     self.serialNumber = 0;  // the initial like is 0.
@@ -233,13 +253,16 @@
     itemMarker.map = mapView_;
     itemMarker.tracksInfoWindowChanges = YES;
     
-    itemMarker.userData = @{@"serialNumber":[NSNumber numberWithInt:0]};  // used to store the serialNumber
+    itemMarker.userData = @{@"serialNumber":[NSNumber numberWithInt:0],
+                            @"markerImage": markerItemImage};
+    // used to store the serialNumber
     
-    [self.markerSet addObject:itemMarker];
+    [self.markerArray addObject:itemMarker];
 }
 
 
 #pragma mark - GoogleMaps Delegate using googleMap API. 
+
 // The infoWindow is a picture. No events can be triggered by tapped certainbutton in that.
 
 /*
@@ -263,6 +286,7 @@
 
 
 #pragma mark - GoogleMaps Delegate
+
 // Since we want to display our custom info window when a marker is tapped, use this delegate method
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
@@ -321,6 +345,7 @@
 
 
 #pragma mark create infoWindow
+
 // This method gets called whenever the map was moving but has now stopped
 - (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position{
     /* if we got here and a marker was tapped and our animate method was called, then it means we're ready
@@ -343,8 +368,8 @@
         frame.origin.x = markerPoint.x - self.displayedInfoWindow.frame.size.width / 2;
         self.displayedInfoWindow.frame = frame;
         
-        self.displayedInfoWindow.markerName.text = self.markerItemName;
-        self.displayedInfoWindow.imageViewMarker.image = self.markerItemImage;
+        self.displayedInfoWindow.markerName.text = self.currentlyTappedMarker.snippet;
+        self.displayedInfoWindow.imageViewMarker.image = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
         // self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
         self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"]];
         [self.displayedInfoWindow.buttonLike addTarget:self action:@selector(likeTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -409,22 +434,75 @@
     
     displayedSerialNumber = [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"];
     displayedSerialNumber = @([displayedSerialNumber integerValue] + 1);
-    self.currentlyTappedMarker.userData = @{@"serialNumber":displayedSerialNumber};
     
-    /*  no need to travere the markerSetArray.
-    for(GMSMarker *marker in self.markerSet) {
-        NSLog(@"SetMarkerName: %@", marker.snippet);
-        NSLog(@"displayedInfoWindow.markerName: %@", self.displayedInfoWindow.markerName.text);
-        if ([marker.snippet isEqualToString: self.displayedInfoWindow.markerName.text]) {
-            displayedSerialNumber = [marker.userData objectForKey:@"serialNumber"];
-            displayedSerialNumber = @([displayedSerialNumber integerValue] + 1);
-            marker.userData = @{@"serialNumber":displayedSerialNumber};
-            break;
-        }
-    }
-    */
+    // temperarily store markerImage.
+    UIImage *markerImage = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
+    
+    self.currentlyTappedMarker.userData = @{@"serialNumber": displayedSerialNumber,
+                                             @"markerImage": markerImage
+                                           };
     self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", displayedSerialNumber];
 }
+
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[RankItemsViewController class]]){
+        RankItemsViewController *rankItemsViewController = (RankItemsViewController *) viewController;
+        NSMutableArray *sortedMarkerArray = [self sortMarkerArray:self.markerArray];
+        rankItemsViewController.markerArray = sortedMarkerArray;
+    }
+    return TRUE;
+}
+
+/*
+- (void) sortMarkerArray:(NSMutableArray *) markerArray {
+    GMSMarker *marker;
+    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:[marker.userData objectForKey:@"serialNumber"]  ascending:NO];
+    [self.markerArray sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
+}
+*/
+
+- (NSMutableArray *) sortMarkerArray:(NSMutableArray *) markerArray {
+    NSMutableArray *sortedMarkerArray = [markerArray sortedArrayUsingComparator:^(id obj1, id obj2){
+        if ([obj1 isKindOfClass:[GMSMarker class]] && [obj2 isKindOfClass:[GMSMarker class]]) {
+            GMSMarker *m1 = obj1;
+            GMSMarker *m2 = obj2;
+            NSNumber *like_m1 = [m1.userData objectForKey:@"serialNumber"];
+            NSNumber *like_m2 = [m2.userData objectForKey:@"serialNumber"];
+            if (like_m1 > like_m2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if (like_m1 < like_m2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        }
+        // TODO: default is the same?
+        return (NSComparisonResult) NSOrderedSame;
+    }];
+    return sortedMarkerArray;
+}
+
+
+
+/*
+ - (IBAction)viewRank:(id)sender {
+ // Create an item store
+ ItemStore *itemStore = [[ItemStore alloc] init];
+ 
+ // Create the image store
+ ImageStore *imageStore = [[ImageStore alloc] init];
+ 
+ // RankItemsViewController *rankItemsViewController = [[[NSBundle mainBundle] loadNibNamed:@"MLProductDescriptionViewController" owner:nil options:NULL] firstObject];
+ 
+ // Create an RankItemsViewController
+ RankItemsViewController *rankItemsViewController = [[RankItemsViewController alloc] initWithItemStore:itemStore
+ imageStore:imageStore];
+ 
+ 
+ // [rankItemsViewController setupRankForMarkerArray:self.markerSet];
+ [self showViewController:rankItemsViewController sender:self];
+ 
+ }
+ */
 
 
 @end
