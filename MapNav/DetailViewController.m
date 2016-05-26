@@ -16,7 +16,7 @@
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
+@property (weak, nonatomic) IBOutlet UITextField *likeNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *longitudeField;
 @property (weak, nonatomic) IBOutlet UITextField *latitudeField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -85,7 +85,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     // Update the item with the text field contents
     self.item.name = self.nameField.text;
-    self.item.serialNumber = self.serialNumberField.text;
+    self.item.likeNumber = self.likeNumberField.text;
     self.item.longitude = [self.longitudeField.text doubleValue];
     self.item.latitude = [self.latitudeField.text doubleValue];
 }
@@ -119,7 +119,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     // import values from the current item to the UI
     self.nameField.text = self.item.name;
-    self.serialNumberField.text = self.item.serialNumber;
+    self.likeNumberField.text = self.item.likeNumber;
     self.longitudeField.text =
     [NSString stringWithFormat:@"%f", self.item.longitude];
     self.latitudeField.text =

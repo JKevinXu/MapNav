@@ -32,13 +32,23 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdT-h1-6jW">
-                    <rect key="frame" x="145" y="216" width="30" height="30"/>
+                    <rect key="frame" x="152" y="216" width="30" height="30"/>
                     <state key="normal" title="Button" image="like.png"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxZ-Pa-Lgj">
-                    <rect key="frame" x="186" y="223" width="52" height="21"/>
+                    <rect key="frame" x="195" y="223" width="52" height="21"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVL-Ld-WOD">
+                    <rect key="frame" x="44" y="219" width="30" height="30"/>
+                    <state key="normal" title="Button" image="IconDislike.png"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9i-6H-2F0">
+                    <rect key="frame" x="85" y="223" width="48" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.066666666666666666" green="0.5607843137254902" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -50,14 +60,17 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="buttonLike" destination="vdT-h1-6jW" id="JRa-L1-nJw"/>
+                <outlet property="buttondislike" destination="hVL-Ld-WOD" id="DAa-5v-LGp"/>
+                <outlet property="dislikeNumberLabel" destination="U9i-6H-2F0" id="h4u-Xk-HW2"/>
                 <outlet property="imageViewMarker" destination="O7K-qw-v5y" id="Zho-xW-tsL"/>
+                <outlet property="likeNumberLabel" destination="qxZ-Pa-Lgj" id="Z8D-jd-Bjp"/>
                 <outlet property="markerName" destination="JmM-T0-5Tr" id="9Mw-zV-goe"/>
-                <outlet property="serialNumberLabel" destination="qxZ-Pa-Lgj" id="6X2-fD-gTx"/>
             </connections>
-            <point key="canvasLocation" x="178" y="270.5"/>
+            <point key="canvasLocation" x="270" y="217.5"/>
         </view>
     </objects>
     <resources>
+        <image name="IconDislike.png" width="263" height="263"/>
         <image name="InforWindowBackground.png" width="660" height="583"/>
         <image name="like.png" width="128" height="128"/>
     </resources>

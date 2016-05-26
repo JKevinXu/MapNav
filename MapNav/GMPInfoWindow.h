@@ -11,10 +11,11 @@
 @interface GMPInfoWindow : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *markerName;
-@property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
-@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likeNumberLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewMarker;
 @property (weak, nonatomic) IBOutlet UIButton *buttonLike;
-@property int serialNumber;
+@property (weak, nonatomic) IBOutlet UIButton *buttondislike;
+@property (weak, nonatomic) IBOutlet UILabel *dislikeNumberLabel;
+@property int likeNumber;
 
 @end

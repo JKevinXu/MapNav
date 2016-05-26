@@ -17,7 +17,7 @@
 @property (nonatomic, weak) Item *container;
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *serialNumber;
+@property (nonatomic, copy) NSString *likeNumber;
 @property (nonatomic) CLLocationCoordinate2D *location;
 @property (nonatomic) double longitude;
 @property (nonatomic) double latitude;
@@ -31,7 +31,7 @@
 - (instancetype)initWithName:(NSString *)name
                    longitude:(double) longitude
                     latitude:(double) latitude
-                serialNumber:(NSString *)sNumber NS_DESIGNATED_INITIALIZER;
+                likeNumber:(NSString *)sNumber NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithName:(NSString *)name;
 

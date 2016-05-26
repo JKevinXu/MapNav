@@ -33,9 +33,11 @@
 @property (nonatomic) BOOL idleAfterMovement;
 @property (strong, nonatomic) GMPInfoWindow *displayedInfoWindow;
 @property (strong, nonatomic) GMSMarker *currentlyTappedMarker;
-@property int serialNumber;
+@property int likeNumber;
 @property (nonatomic) UIButton *buttonViewRank;
-
+@property int totalLike;
+@property int totalDislike;
+@property int numOfMarkers;
 // @property (nonatomic) GMSMapView *mapView_;
 
 @end
@@ -105,32 +107,11 @@
     [cleanButton addTarget:self action:@selector(cleanMarker:) forControlEvents:UIControlEventTouchUpInside];
     [mapView_ addSubview:cleanButton];
     
-    /*
-    // View rank Button.
-    UIButton *buttonViewRank = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    buttonViewRank.frame = CGRectMake(mapView_.bounds.size.width - 300, mapView_.bounds.size.height - 600, 200, 40);
-
-    CGRectMake(80, 100, 100, 40);
-    buttonViewRank.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-    
-    [buttonViewRank setTitle:NSLocalizedString(@"Activity Rank", nil) forState:UIControlStateNormal];
-    [buttonViewRank setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    buttonViewRank.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
-    buttonViewRank.layer.cornerRadius = 4.0f;
-    buttonViewRank.layer.masksToBounds = YES;
-    
-    self.buttonViewRank = buttonViewRank;
-    
-    [buttonViewRank addTarget:self action:@selector(viewRank:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // [mapNavViewController showMarker:buttonSendResponse];
-    
-    self.buttonViewRank.showsTouchWhenHighlighted = YES;
-    [mapView_ addSubview:buttonViewRank];
-    */
-    
-    
     self.markerArray = [[NSMutableArray alloc] init];
+    
+    self.totalLike = 0;
+    self.totalDislike = 0;
+    self.numOfMarkers = 0;
 }
 
 // Rather than setting -myLocationEnabled to YES directly,
@@ -230,7 +211,7 @@
 {
     self.markerItemName = markerItemName;
     self.markerItemImage = markerItemImage;
-    self.serialNumber = 0;  // the initial like is 0.
+    self.likeNumber = 0;  // the initial like is 0.
     
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(markerItemLatitude, markerItemLongitude);
     GMSMarker *itemMarker = [GMSMarker markerWithPosition:position];
@@ -253,11 +234,27 @@
     itemMarker.map = mapView_;
     itemMarker.tracksInfoWindowChanges = YES;
     
-    itemMarker.userData = @{@"serialNumber":[NSNumber numberWithInt:0],
-                            @"markerImage": markerItemImage};
-    // used to store the serialNumber
+    // get the currentTime when the marker is created.
+    NSString *markingTime = [self getCurrentTime];
+    NSLog(@"The marking time is: %@", markingTime);
+    
+    NSMutableArray *likesTimeStampArray = [[NSMutableArray alloc] init];
+    NSMutableArray *dislikesTimeStampArray = [[NSMutableArray alloc] init];
+    
+    itemMarker.userData = @{@"likeNumber": [NSNumber numberWithInt:0],
+                            @"dislikeNumber": [NSNumber numberWithInt:0],
+                            @"markerImage": markerItemImage,
+                            @"bRatingNumber": [NSNumber numberWithInt:0],
+                            @"lBWScoreNumber": [NSNumber numberWithInt:0],
+                            @"markingTime": markingTime,
+                            @"likesTimeStampArray": likesTimeStampArray,
+                            @"dislikesTimeStampArray": dislikesTimeStampArray
+                            };
+    // used to store the likeNumber
     
     [self.markerArray addObject:itemMarker];
+    self.numOfMarkers ++;
+    NSLog(@"num of markers in map: %d", self.numOfMarkers);
 }
 
 
@@ -370,9 +367,11 @@
         
         self.displayedInfoWindow.markerName.text = self.currentlyTappedMarker.snippet;
         self.displayedInfoWindow.imageViewMarker.image = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
-        // self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%d", self.serialNumber];
-        self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"]];
+        // self.displayedInfoWindow.likeNumberLabel.text = [NSString stringWithFormat:@"%d", self.likeNumber];
+        self.displayedInfoWindow.likeNumberLabel.text = [NSString stringWithFormat:@"%@", [self.currentlyTappedMarker.userData objectForKey:@"likeNumber"]];
+        self.displayedInfoWindow.dislikeNumberLabel.text = [NSString stringWithFormat:@"%@", [self.currentlyTappedMarker.userData objectForKey:@"dislikeNumber"]];
         [self.displayedInfoWindow.buttonLike addTarget:self action:@selector(likeTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [self.displayedInfoWindow.buttondislike addTarget:self action:@selector(dislikeTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         
         [self.view addSubview:self.displayedInfoWindow];
@@ -429,46 +428,189 @@
 #pragma mark - Function of Like button in the infoWindow
 
 - (IBAction)likeTapped:(id)sender {
-    NSNumber *displayedSerialNumber = [[NSNumber alloc] init];
-    NSLog(@"self.displayedInfoWindow.serialNumberLabel.text: %@", self.displayedInfoWindow.serialNumberLabel.text);
-    
-    displayedSerialNumber = [self.currentlyTappedMarker.userData objectForKey:@"serialNumber"];
-    displayedSerialNumber = @([displayedSerialNumber integerValue] + 1);
+    NSNumber *displayedlikeNumber = [[NSNumber alloc] init];
+    NSNumber *displayedDislikeNumber = [[NSNumber alloc] init];
+    UIImage  *markerImage = [[UIImage alloc] init];
+    NSNumber *bRatingNumber = [[NSNumber alloc] init];
+    NSNumber *lBWScoreNumber = [[NSNumber alloc] init];
+    NSString *markingTime = [[NSString alloc] init];
+    NSMutableArray *likesTimeStampArray = [[NSMutableArray alloc] init];
+    NSMutableArray *dislikesTimeStampArray = [[NSMutableArray alloc] init];
+
+    // increase likeNumber by 1.
+    displayedlikeNumber = [self.currentlyTappedMarker.userData objectForKey:@"likeNumber"];
+    displayedlikeNumber = @([displayedlikeNumber integerValue] + 1);
     
     // temperarily store markerImage.
-    UIImage *markerImage = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
+    markerImage = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
     
-    self.currentlyTappedMarker.userData = @{@"serialNumber": displayedSerialNumber,
-                                             @"markerImage": markerImage
+    // temperarily store dislikeNumber.
+    displayedDislikeNumber = [self.currentlyTappedMarker.userData objectForKey:@"dislikeNumber"];
+    
+    // calculate bRating.
+    CGFloat bRating = [self getBratingWithNumOfLikeForOneMarker: [displayedlikeNumber integerValue]
+                                     withNumOfDislikeForOneMarker: [displayedDislikeNumber integerValue]];
+    bRatingNumber = @(bRating);
+    
+    
+    // calculate lBWScore.
+    CGFloat lBWScore = [self getLBWScoreWithNumOfLikeForOneMarker: [displayedlikeNumber integerValue]
+                                   withNumOfDislikeForOneMarker: [displayedDislikeNumber integerValue]];
+    lBWScoreNumber = @(lBWScore);
+    
+    // temperarily store markingTime.
+    markingTime = [self.currentlyTappedMarker.userData objectForKey:@"markingTime"];
+    
+    // get the likeTappedTime time, and store it in the like array.
+    NSString *likeTappedTime = [self getCurrentTime];
+    NSLog(@"The likeTappedTime time is: %@", likeTappedTime);
+    likesTimeStampArray = [self.currentlyTappedMarker.userData objectForKey:@"likesTimeStampArray"];
+    [likesTimeStampArray addObject:likeTappedTime];
+    NSLog(@"The likesTimeStampArray is: %@", likesTimeStampArray);
+    
+    // temperarily store dislikesTimeStampArray.
+    dislikesTimeStampArray = [self.currentlyTappedMarker.userData objectForKey:@"dislikesTimeStampArray"];
+    
+    
+    self.currentlyTappedMarker.userData = @{@"likeNumber": displayedlikeNumber,
+                                            @"dislikeNumber": displayedDislikeNumber,
+                                            @"markerImage": markerImage,
+                                            @"bRatingNumber": bRatingNumber,
+                                            @"lBWScoreNumber": lBWScoreNumber,
+                                            @"markingTime": markingTime,
+                                            @"likesTimeStampArray": likesTimeStampArray,
+                                            @"dislikesTimeStampArray": dislikesTimeStampArray
                                            };
-    self.displayedInfoWindow.serialNumberLabel.text = [NSString stringWithFormat:@"%@", displayedSerialNumber];
+    
+    self.displayedInfoWindow.likeNumberLabel.text = [NSString stringWithFormat:@"%@", displayedlikeNumber];
+    self.displayedInfoWindow.dislikeNumberLabel.text = [NSString stringWithFormat:@"%@", displayedDislikeNumber];
+    
+    self.totalLike ++;
+    NSLog(@"num of total likes: %d", self.totalLike);
+    NSLog(@"bRating is: %@", bRatingNumber);
+    NSLog(@"lBWScore is: %@", lBWScoreNumber);
+}
+
+- (IBAction)dislikeTapped:(id)sender {
+    NSNumber *displayedlikeNumber = [[NSNumber alloc] init];
+    NSNumber *displayedDislikeNumber = [[NSNumber alloc] init];
+    UIImage  *markerImage = [[UIImage alloc] init];
+    NSNumber *bRatingNumber = [[NSNumber alloc] init];
+    NSNumber *lBWScoreNumber = [[NSNumber alloc] init];
+    NSString *markingTime = [[NSString alloc] init];
+    NSMutableArray *likesTimeStampArray = [[NSMutableArray alloc] init];
+    NSMutableArray *dislikesTimeStampArray = [[NSMutableArray alloc] init];
+    
+    // increase dislikeNumber by 1.
+    displayedDislikeNumber = [self.currentlyTappedMarker.userData objectForKey:@"dislikeNumber"];
+    displayedDislikeNumber = @([displayedDislikeNumber integerValue] + 1);
+    
+    // temperarily store markerImage and displayedlikeNumber.
+    markerImage = [self.currentlyTappedMarker.userData objectForKey:@"markerImage"];
+    displayedlikeNumber = [self.currentlyTappedMarker.userData objectForKey:@"likeNumber"];
+    
+    // calculate bRating.
+    CGFloat bRating = [self getBratingWithNumOfLikeForOneMarker: [displayedlikeNumber integerValue]
+                               withNumOfDislikeForOneMarker: [displayedDislikeNumber integerValue]];
+    bRatingNumber = @(bRating);
+    
+    
+    // calculate lBWScore.
+    CGFloat lBWScore = [self getLBWScoreWithNumOfLikeForOneMarker: [displayedlikeNumber integerValue]
+                                     withNumOfDislikeForOneMarker: [displayedDislikeNumber integerValue]];
+    lBWScoreNumber = @(lBWScore);
+    
+    // temperarily store markingTime.
+    markingTime = [self.currentlyTappedMarker.userData objectForKey:@"markingTime"];
+    
+    // temperarily store likesTimeStampArray.
+    likesTimeStampArray = [self.currentlyTappedMarker.userData objectForKey:@"likesTimeStampArray"];
+    
+    // get the dislikeTappedTime time, and store it in the like array.
+    NSString *dislikeTappedTime = [self getCurrentTime];
+    NSLog(@"The dislikeTappedTime time is: %@", dislikeTappedTime);
+    dislikesTimeStampArray = [self.currentlyTappedMarker.userData objectForKey:@"dislikesTimeStampArray"];
+    [dislikesTimeStampArray addObject:dislikeTappedTime];
+    NSLog(@"The dislikesTimeStampArray is: %@", dislikesTimeStampArray);
+    
+    self.currentlyTappedMarker.userData = @{@"likeNumber": displayedlikeNumber,
+                                            @"dislikeNumber": displayedDislikeNumber,
+                                            @"markerImage": markerImage,
+                                            @"bRatingNumber": bRatingNumber,
+                                            @"lBWScoreNumber": lBWScoreNumber,
+                                            @"markingTime": markingTime,
+                                            @"likesTimeStampArray": likesTimeStampArray,
+                                            @"dislikesTimeStampArray": dislikesTimeStampArray
+                                            };
+    
+    self.displayedInfoWindow.likeNumberLabel.text = [NSString stringWithFormat:@"%@", displayedlikeNumber];
+    self.displayedInfoWindow.dislikeNumberLabel.text = [NSString stringWithFormat:@"%@", displayedDislikeNumber];
+    
+    self.totalDislike ++;
+    NSLog(@"num of total disLikes: %d", self.totalDislike);
+    NSLog(@"bRating is: %@", bRatingNumber);
+    NSLog(@"lBWScore is: %@", lBWScoreNumber);
+    
 }
 
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     if ([viewController isKindOfClass:[RankItemsViewController class]]){
         RankItemsViewController *rankItemsViewController = (RankItemsViewController *) viewController;
-        NSMutableArray *sortedMarkerArray = [self sortMarkerArray:self.markerArray];
-        rankItemsViewController.markerArray = sortedMarkerArray;
+        NSMutableArray *sortedMarkerArrayByLike = [self sortMarkerArrayByLike:self.markerArray];
+        rankItemsViewController.markerArray = sortedMarkerArrayByLike;
+        
+        // NSMutableArray *sortedMarkerArrayBydislike = [self sortMarkerArrayByUnike:self.markerArray];
+        // rankItemsViewController.markerdislikeArray = sortedMarkerArrayBydislike;
+        
+        NSMutableArray *sortedMarkerArrayByLBWScore = [self sortMarkerArrayByLBWScore:self.markerArray];
+        rankItemsViewController.markerLBWScoreArray = sortedMarkerArrayByLBWScore;
+        
+        NSMutableArray *sortedMarkerArrayByBRating = [self sortMarkerArrayByBRating:self.markerArray];
+        rankItemsViewController.markerBRatingArray = sortedMarkerArrayByBRating;
     }
     return TRUE;
+}
+
+- (CGFloat)getBratingWithNumOfLikeForOneMarker: (NSInteger) numLike
+              withNumOfDislikeForOneMarker: (NSInteger) numDislike {
+    
+    CGFloat aveTotalVotes = (self.totalLike + self.totalDislike) / self.numOfMarkers;
+    CGFloat aveRating = (self.totalLike - self.totalDislike) / self.numOfMarkers;
+    NSInteger thisMarkerTotalVotes = (numLike + numDislike);
+    NSInteger thisMarkerRating = (numLike - numDislike);
+    CGFloat bRating = (aveTotalVotes * aveRating + thisMarkerTotalVotes * thisMarkerRating)/(aveTotalVotes + thisMarkerTotalVotes);
+    
+    // bRating = numLike + numDislike;
+    
+    return bRating;
+}
+
+- (CGFloat)getLBWScoreWithNumOfLikeForOneMarker: (NSInteger) numLike
+                  withNumOfDislikeForOneMarker: (NSInteger) numDislike {
+    
+    CGFloat LBWScore = ((numLike + 1.9208) / (numLike + numDislike) -
+     1.96 * sqrt((numLike * numDislike) / (numLike + numDislike) + 0.9604) /
+     (numLike + numDislike)) / (1 + 3.8416 / (numLike + numDislike));
+    
+    return LBWScore;
 }
 
 /*
 - (void) sortMarkerArray:(NSMutableArray *) markerArray {
     GMSMarker *marker;
-    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:[marker.userData objectForKey:@"serialNumber"]  ascending:NO];
+    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:[marker.userData objectForKey:@"likeNumber"]  ascending:NO];
     [self.markerArray sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 */
 
-- (NSMutableArray *) sortMarkerArray:(NSMutableArray *) markerArray {
+- (NSMutableArray *) sortMarkerArrayByLike:(NSMutableArray *) markerArray {
     NSMutableArray *sortedMarkerArray = [markerArray sortedArrayUsingComparator:^(id obj1, id obj2){
         if ([obj1 isKindOfClass:[GMSMarker class]] && [obj2 isKindOfClass:[GMSMarker class]]) {
             GMSMarker *m1 = obj1;
             GMSMarker *m2 = obj2;
-            NSNumber *like_m1 = [m1.userData objectForKey:@"serialNumber"];
-            NSNumber *like_m2 = [m2.userData objectForKey:@"serialNumber"];
+            NSNumber *like_m1 = [m1.userData objectForKey:@"likeNumber"];
+            NSNumber *like_m2 = [m2.userData objectForKey:@"likeNumber"];
             if (like_m1 > like_m2) {
                 return (NSComparisonResult)NSOrderedAscending;
             } else if (like_m1 < like_m2) {
@@ -481,7 +623,86 @@
     return sortedMarkerArray;
 }
 
+- (NSMutableArray *) sortMarkerArrayByUnike:(NSMutableArray *) markerArray {
+    NSMutableArray *sortedMarkerArray = [markerArray sortedArrayUsingComparator:^(id obj1, id obj2){
+        if ([obj1 isKindOfClass:[GMSMarker class]] && [obj2 isKindOfClass:[GMSMarker class]]) {
+            GMSMarker *m1 = obj1;
+            GMSMarker *m2 = obj2;
+            NSNumber *like_m1 = [m1.userData objectForKey:@"dislikeNumber"];
+            NSNumber *like_m2 = [m2.userData objectForKey:@"dislikeNumber"];
+            if (like_m1 > like_m2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if (like_m1 < like_m2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        }
+        // TODO: default is the same?
+        return (NSComparisonResult) NSOrderedSame;
+    }];
+    return sortedMarkerArray;
+}
 
+- (NSMutableArray *) sortMarkerArrayByBRating:(NSMutableArray *) markerArray {
+    NSMutableArray *sortedMarkerArray = [markerArray sortedArrayUsingComparator:^(id obj1, id obj2){
+        if ([obj1 isKindOfClass:[GMSMarker class]] && [obj2 isKindOfClass:[GMSMarker class]]) {
+            GMSMarker *m1 = obj1;
+            GMSMarker *m2 = obj2;
+            NSNumber *like_m1 = [m1.userData objectForKey:@"bRatingNumber"];
+            NSNumber *like_m2 = [m2.userData objectForKey:@"bRatingNumber"];
+            CGFloat bRating_1 = [like_m1 floatValue];
+            CGFloat bRating_2 = [like_m2 floatValue];
+            
+            if (bRating_1 > bRating_2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if (bRating_1 < bRating_2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        }
+        // TODO: default is the same?
+        return (NSComparisonResult) NSOrderedSame;
+    }];
+    return sortedMarkerArray;
+}
+
+- (NSMutableArray *) sortMarkerArrayByLBWScore:(NSMutableArray *) markerArray {
+    NSMutableArray *sortedMarkerArray = [markerArray sortedArrayUsingComparator:^(id obj1, id obj2){
+        if ([obj1 isKindOfClass:[GMSMarker class]] && [obj2 isKindOfClass:[GMSMarker class]]) {
+            GMSMarker *m1 = obj1;
+            GMSMarker *m2 = obj2;
+            NSNumber *like_m1 = [m1.userData objectForKey:@"lBWScoreNumber"];
+            NSNumber *like_m2 = [m2.userData objectForKey:@"lBWScoreNumber"];
+            CGFloat lBWScore_1 = [like_m1 floatValue];
+            CGFloat lBWScore_2 = [like_m2 floatValue];
+            
+            if (lBWScore_1 > lBWScore_2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if (lBWScore_1 < lBWScore_2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        }
+        // TODO: default is the same?
+        return (NSComparisonResult) NSOrderedSame;
+    }];
+    return sortedMarkerArray;
+}
+
+
+#pragma mark - Convert the current time to "yyyy-MM-dd'T'HH:mm:ss.SSS'Z" format.
+- (NSString *)toStringFromDateTime:(NSDate*)datetime {
+    // Purpose: Return a string of the specified date-time in UTC (Zulu) time zone in ISO 8601 format.
+    // Example: 2013-10-25T06:59:43.431Z
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    NSString* dateTimeInIsoFormatForZuluTimeZone = [dateFormatter stringFromDate:datetime];
+    return dateTimeInIsoFormatForZuluTimeZone;
+}
+
+
+- (NSString *) getCurrentTime {
+    // Purpose: Return a string of the current date-time in UTC (Zulu) time zone in ISO 8601 format.
+    return [self toStringFromDateTime:[NSDate date]];
+}
 
 /*
  - (IBAction)viewRank:(id)sender {

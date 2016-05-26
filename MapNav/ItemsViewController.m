@@ -14,6 +14,7 @@
 #import "ImageStore.h"
 #import "MapNavViewController.h"
 
+
 @interface ItemsViewController ()
 
 @property (nonatomic) ItemStore *itemStore;
@@ -101,7 +102,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell with the Item's properties
     Item *item = self.itemStore.allItems[indexPath.row];
     cell.nameLabel.text = item.name;
-    cell.serialNumberLabel.text = item.serialNumber;
+    cell.likeNumberLabel.text = item.likeNumber;
     
     UIImage *itemImage = [self.imageStore imageForKey:item.itemKey];
     cell.imageViewMarker.image = itemImage;
@@ -112,6 +113,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [self setMarker:cell.buttonPutMarkerInMap];
     
     [cell.buttonPutMarkerInMap addTarget:self action:@selector(setMarker:) forControlEvents:UIControlEventTouchUpInside];
+    cell.buttonPutMarkerInMap.showsTouchWhenHighlighted = YES;
     
     return cell;
     

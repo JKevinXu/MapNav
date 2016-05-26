@@ -32,10 +32,9 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fw-Kh-5iH">
-                        <rect key="frame" x="303" y="120" width="50" height="40"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <state key="normal" title="Mark"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsL-Tm-RqF">
+                        <rect key="frame" x="291" y="206" width="50" height="50"/>
+                        <state key="normal" title="Button" image="markButtonIcon.png"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -54,11 +53,14 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="buttonPutMarkerInMap" destination="8Fw-Kh-5iH" id="PXQ-Vx-rm1"/>
+                <outlet property="buttonPutMarkerInMap" destination="bsL-Tm-RqF" id="b3R-3J-fV4"/>
                 <outlet property="imageViewMarker" destination="cK2-At-S2P" id="Qdo-g3-6yI"/>
                 <outlet property="nameLabel" destination="aJl-Tn-b8j" id="32R-Bd-puO"/>
             </connections>
             <point key="canvasLocation" x="440" y="248"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="markButtonIcon.png" width="436" height="429"/>
+    </resources>
 </document>

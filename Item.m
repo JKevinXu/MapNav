@@ -37,11 +37,11 @@
     int randomValue = arc4random_uniform(100);
     
     // Use NSUUID to generate a random 5-letter string for the serial number
-    NSString *randomSerialNumber = [[[NSUUID UUID] UUIDString] substringToIndex:5];
+    NSString *randomlikeNumber = [[[NSUUID UUID] UUIDString] substringToIndex:5];
     
     // Institiate the new item with the random values
     Item *newItem = [[self alloc] initWithName: randomName
-                                  serialNumber: randomSerialNumber];
+                                  likeNumber: randomlikeNumber];
     
     
     return newItem;
@@ -54,7 +54,7 @@
     NSString *descriptionString =
     [[NSString alloc] initWithFormat:@"%@ (%@): Location longitude $%f, latitude $%f, reorder on %@",
                         self.name,
-                        self.serialNumber,
+                        self.likeNumber,
                         self.longitude,
                         self.latitude,
                         self.dateCreated];
@@ -64,7 +64,7 @@
 - (instancetype)initWithName:(NSString *)name
                    longitude:(double)longitude
                     latitude:(double)latitude
-                serialNumber:(NSString *)sNumber
+                likeNumber:(NSString *)sNumber
 {
     // Call the superclass's designated initializer
     self = [super init];
@@ -73,7 +73,7 @@
     if (self) {
     // Give the instance variable initial values
         _name = name;
-        _serialNumber = sNumber;
+        _likeNumber = sNumber;
         _longitude = longitude;
         _latitude = latitude;
         // Set _dateCreated to the current date and time
@@ -91,7 +91,7 @@
     return[self initWithName:name
                    longitude:-121.7617
                     latitude:38.5382
-                serialNumber:@""];
+                likeNumber:@""];
 }
 
 
@@ -106,7 +106,7 @@
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
     [aCoder encodeObject:self.itemKey forKey:@"itemKey"];
-    [aCoder encodeObject:self.serialNumber forKey:@"serialNumber"];
+    [aCoder encodeObject:self.likeNumber forKey:@"likeNumber"];
     [aCoder encodeDouble:self.longitude forKey:@"longitude"];
     [aCoder encodeDouble:self.latitude forKey:@"latitude"];
 }
@@ -117,7 +117,7 @@
         _name = [aDecoder decodeObjectForKey:@"name"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
         _itemKey = [aDecoder decodeObjectForKey:@"itemKey"];
-        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _likeNumber = [aDecoder decodeObjectForKey:@"likeNumber"];
         _longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _latitude = [aDecoder decodeDoubleForKey:@"latitude"];
     }

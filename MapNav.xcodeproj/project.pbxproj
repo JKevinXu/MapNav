@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		05665963457CF513DA674A66 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9281669EF92827AFE57B12 /* libPods.a */; };
+		AF21492A1CE2E76600E732CC /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2149291CE2E76600E732CC /* CustomHeaderView.xib */; };
+		AF21492D1CE2E7C500E732CC /* CustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF21492C1CE2E7C500E732CC /* CustomHeaderView.m */; };
+		AF21492F1CE2F16500E732CC /* MapNavAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AF21492E1CE2F16500E732CC /* MapNavAppIcon.png */; };
+		AF2149311CE2F6A400E732CC /* markButtonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AF2149301CE2F6A400E732CC /* markButtonIcon.png */; };
 		AF2342531C49A8A0000A6AB1 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342521C49A8A0000A6AB1 /* Item.m */; };
 		AF2342561C49AEDC000A6AB1 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342551C49AEDC000A6AB1 /* ItemStore.m */; };
 		AF2342591C49D086000A6AB1 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2342581C49D086000A6AB1 /* ItemCell.m */; };
@@ -16,6 +20,7 @@
 		AF341F621CDAB6410094B07E /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF341F611CDAB6410094B07E /* InfoWindow.xib */; };
 		AF341F681CDADBA20094B07E /* InforWindowBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = AF341F671CDADBA20094B07E /* InforWindowBackground.png */; };
 		AF341F6A1CDB0CD00094B07E /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = AF341F691CDB0CD00094B07E /* like.png */; };
+		AF5794E41CF783BD002CEE7E /* IconDislike.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5794E31CF783BD002CEE7E /* IconDislike.png */; };
 		AF6CF8B41C499CEE00B1477B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B31C499CEE00B1477B /* main.m */; };
 		AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6CF8B61C499CEE00B1477B /* AppDelegate.m */; };
 		AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6CF8BE1C499CEE00B1477B /* Images.xcassets */; };
@@ -25,6 +30,7 @@
 		AF74173E1CB79A2000F71CB5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AF74173D1CB79A2000F71CB5 /* Podfile */; };
 		AF7417411CB79E5200F71CB5 /* MapNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7417401CB79E5200F71CB5 /* MapNavViewController.m */; };
 		AF7417431CB8602400F71CB5 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = AF7417421CB8602400F71CB5 /* car.png */; };
+		AF8575DE1CE5177D0039C4BB /* DZNSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8575DD1CE5177D0039C4BB /* DZNSegmentedControl.m */; };
 		AF99FA1B1CE1377700641F07 /* RankItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */; };
 		AF99FA1F1CE13B4000641F07 /* rankIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF99FA1E1CE13B4000641F07 /* rankIcon.jpg */; };
 		AF99FA211CE13CAA00641F07 /* ActivityRank.png in Resources */ = {isa = PBXBuildFile; fileRef = AF99FA201CE13CAA00641F07 /* ActivityRank.png */; };
@@ -49,6 +55,11 @@
 
 /* Begin PBXFileReference section */
 		2B8D3F2827970CE0A3C6A6A0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AF2149291CE2E76600E732CC /* CustomHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
+		AF21492B1CE2E7C500E732CC /* CustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomHeaderView.h; sourceTree = "<group>"; };
+		AF21492C1CE2E7C500E732CC /* CustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomHeaderView.m; sourceTree = "<group>"; };
+		AF21492E1CE2F16500E732CC /* MapNavAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MapNavAppIcon.png; path = Images.xcassets/MapNavAppIcon.png; sourceTree = "<group>"; };
+		AF2149301CE2F6A400E732CC /* markButtonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markButtonIcon.png; sourceTree = "<group>"; };
 		AF2342511C49A8A0000A6AB1 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = ../Item.h; sourceTree = "<group>"; };
 		AF2342521C49A8A0000A6AB1 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = ../Item.m; sourceTree = "<group>"; };
 		AF2342541C49AEDC000A6AB1 /* ItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
@@ -62,6 +73,7 @@
 		AF341F611CDAB6410094B07E /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
 		AF341F671CDADBA20094B07E /* InforWindowBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InforWindowBackground.png; sourceTree = "<group>"; };
 		AF341F691CDB0CD00094B07E /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		AF5794E31CF783BD002CEE7E /* IconDislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconDislike.png; sourceTree = "<group>"; };
 		AF6CF8AE1C499CEE00B1477B /* MapNav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapNav.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6CF8B21C499CEE00B1477B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6CF8B31C499CEE00B1477B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -78,6 +90,8 @@
 		AF74173F1CB79E5200F71CB5 /* MapNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavViewController.h; sourceTree = "<group>"; };
 		AF7417401CB79E5200F71CB5 /* MapNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavViewController.m; sourceTree = "<group>"; };
 		AF7417421CB8602400F71CB5 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		AF8575DC1CE5177D0039C4BB /* DZNSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZNSegmentedControl.h; sourceTree = "<group>"; };
+		AF8575DD1CE5177D0039C4BB /* DZNSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZNSegmentedControl.m; sourceTree = "<group>"; };
 		AF99FA191CE1377700641F07 /* RankItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankItemsViewController.h; sourceTree = "<group>"; };
 		AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankItemsViewController.m; sourceTree = "<group>"; };
 		AF99FA1E1CE13B4000641F07 /* rankIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rankIcon.jpg; sourceTree = "<group>"; };
@@ -163,12 +177,16 @@
 				AF6CF8D81C49A03D00B1477B /* ItemsViewController.m */,
 				AF99FA191CE1377700641F07 /* RankItemsViewController.h */,
 				AF99FA1A1CE1377700641F07 /* RankItemsViewController.m */,
+				AF2149291CE2E76600E732CC /* CustomHeaderView.xib */,
+				AF21492B1CE2E7C500E732CC /* CustomHeaderView.h */,
+				AF21492C1CE2E7C500E732CC /* CustomHeaderView.m */,
 				AF23425E1C4B53C9000A6AB1 /* DetailViewController.h */,
 				AFB06EA51CBC87A60010BAFF /* DetailViewController.m */,
 				AFB06EA61CBC87A60010BAFF /* DetailViewController.xib */,
 				AF2342631C4C7CE4000A6AB1 /* ImageStore.h */,
 				AF2342671C4C7D85000A6AB1 /* ImageStore.m */,
 				AF341F691CDB0CD00094B07E /* like.png */,
+				AF5794E31CF783BD002CEE7E /* IconDislike.png */,
 				AF341F671CDADBA20094B07E /* InforWindowBackground.png */,
 				AFB9C4711CD9C6F4000FE75E /* GMPInfoWindow.h */,
 				AF341F611CDAB6410094B07E /* InfoWindow.xib */,
@@ -179,11 +197,15 @@
 				AF2342521C49A8A0000A6AB1 /* Item.m */,
 				AF2342571C49D086000A6AB1 /* ItemCell.h */,
 				AF23425A1C49D164000A6AB1 /* ItemCell.xib */,
+				AF2149301CE2F6A400E732CC /* markButtonIcon.png */,
 				AF2342581C49D086000A6AB1 /* ItemCell.m */,
 				AF99FA241CE1488000641F07 /* RankItemCell.h */,
 				AF99FA221CE1474500641F07 /* RankItemCell.xib */,
 				AF99FA251CE1488000641F07 /* RankItemCell.m */,
+				AF8575DC1CE5177D0039C4BB /* DZNSegmentedControl.h */,
+				AF8575DD1CE5177D0039C4BB /* DZNSegmentedControl.m */,
 				AF6CF8BE1C499CEE00B1477B /* Images.xcassets */,
+				AF21492E1CE2F16500E732CC /* MapNavAppIcon.png */,
 				AF7417421CB8602400F71CB5 /* car.png */,
 				AFB06EAD1CBFFBAC0010BAFF /* MapMarker.png */,
 				AFB06EAE1CBFFBAC0010BAFF /* MarkerPlay.png */,
@@ -306,15 +328,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF99FA1F1CE13B4000641F07 /* rankIcon.jpg in Resources */,
+				AF21492F1CE2F16500E732CC /* MapNavAppIcon.png in Resources */,
 				AF7417431CB8602400F71CB5 /* car.png in Resources */,
 				AFB06EB01CBFFBAC0010BAFF /* MarkerPlay.png in Resources */,
+				AF2149311CE2F6A400E732CC /* markButtonIcon.png in Resources */,
 				AF99FA211CE13CAA00641F07 /* ActivityRank.png in Resources */,
 				AFB06EA81CBC87A60010BAFF /* DetailViewController.xib in Resources */,
 				AF74173E1CB79A2000F71CB5 /* Podfile in Resources */,
 				AF99FA231CE1474500641F07 /* RankItemCell.xib in Resources */,
 				AF6CF8C21C499CEE00B1477B /* LaunchScreen.xib in Resources */,
+				AF5794E41CF783BD002CEE7E /* IconDislike.png in Resources */,
 				AF341F621CDAB6410094B07E /* InfoWindow.xib in Resources */,
 				AF6CF8BF1C499CEE00B1477B /* Images.xcassets in Resources */,
+				AF21492A1CE2E76600E732CC /* CustomHeaderView.xib in Resources */,
 				AFB06EAF1CBFFBAC0010BAFF /* MapMarker.png in Resources */,
 				AF341F681CDADBA20094B07E /* InforWindowBackground.png in Resources */,
 				AF23425B1C49D164000A6AB1 /* ItemCell.xib in Resources */,
@@ -393,6 +419,8 @@
 				AFB9C4731CD9C6F4000FE75E /* GMPInfoWindow.m in Sources */,
 				AF6CF8B71C499CEE00B1477B /* AppDelegate.m in Sources */,
 				AF6CF8D91C49A03D00B1477B /* ItemsViewController.m in Sources */,
+				AF8575DE1CE5177D0039C4BB /* DZNSegmentedControl.m in Sources */,
+				AF21492D1CE2E7C500E732CC /* CustomHeaderView.m in Sources */,
 				AF6CF8B41C499CEE00B1477B /* main.m in Sources */,
 				AF2342561C49AEDC000A6AB1 /* ItemStore.m in Sources */,
 				AF2342681C4C7D85000A6AB1 /* ImageStore.m in Sources */,

@@ -11,7 +11,6 @@
                 <outlet property="latitudeField" destination="avr-IY-55V" id="wZF-v6-5WM"/>
                 <outlet property="longitudeField" destination="YMA-FF-BQp" id="fi4-gi-rfO"/>
                 <outlet property="nameField" destination="EbB-Rr-asV" id="jQS-vW-F0p"/>
-                <outlet property="serialNumberField" destination="nuh-Sg-WAd" id="jm1-cp-bsG"/>
                 <outlet property="toolBar" destination="YeD-4J-H8k" id="5dY-e5-icc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
