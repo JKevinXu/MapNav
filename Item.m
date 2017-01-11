@@ -100,13 +100,13 @@
     return [self initWithName:@"Item"];
 }
 
-
+#pragma mark - Store items with NSCoding
 // MARK: - NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
     [aCoder encodeObject:self.itemKey forKey:@"itemKey"];
-    [aCoder encodeObject:self.likeNumber forKey:@"likeNumber"];
+    // [aCoder encodeObject:self.likeNumber forKey:@"likeNumber"];
     [aCoder encodeDouble:self.longitude forKey:@"longitude"];
     [aCoder encodeDouble:self.latitude forKey:@"latitude"];
 }
@@ -117,7 +117,7 @@
         _name = [aDecoder decodeObjectForKey:@"name"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
         _itemKey = [aDecoder decodeObjectForKey:@"itemKey"];
-        _likeNumber = [aDecoder decodeObjectForKey:@"likeNumber"];
+        // _likeNumber = [aDecoder decodeObjectForKey:@"likeNumber"];
         _longitude = [aDecoder decodeDoubleForKey:@"longitude"];
         _latitude = [aDecoder decodeDoubleForKey:@"latitude"];
     }

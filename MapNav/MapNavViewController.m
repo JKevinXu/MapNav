@@ -114,6 +114,7 @@
     self.numOfMarkers = 0;
 }
 
+#pragma mark - GoogleMaps Delegate using googleMap API.
 // Rather than setting -myLocationEnabled to YES directly,
 // call this method:
 
@@ -258,7 +259,7 @@
 }
 
 
-#pragma mark - GoogleMaps Delegate using googleMap API. 
+
 
 // The infoWindow is a picture. No events can be triggered by tapped certainbutton in that.
 
@@ -425,7 +426,27 @@
     }
 }
 
-#pragma mark - Function of Like button in the infoWindow
+#pragma mark - tabBarController for 3 ranks
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[RankItemsViewController class]]){
+        RankItemsViewController *rankItemsViewController = (RankItemsViewController *) viewController;
+        NSMutableArray *sortedMarkerArrayByLike = [self sortMarkerArrayByLike:self.markerArray];
+        rankItemsViewController.markerArray = sortedMarkerArrayByLike;
+        
+        // NSMutableArray *sortedMarkerArrayBydislike = [self sortMarkerArrayByUnike:self.markerArray];
+        // rankItemsViewController.markerdislikeArray = sortedMarkerArrayBydislike;
+        
+        NSMutableArray *sortedMarkerArrayByLBWScore = [self sortMarkerArrayByLBWScore:self.markerArray];
+        rankItemsViewController.markerLBWScoreArray = sortedMarkerArrayByLBWScore;
+        
+        NSMutableArray *sortedMarkerArrayByBRating = [self sortMarkerArrayByBRating:self.markerArray];
+        rankItemsViewController.markerBRatingArray = sortedMarkerArrayByBRating;
+    }
+    return TRUE;
+}
+
+#pragma mark - Method of Like and Dislike buttons in the infoWindow
 
 - (IBAction)likeTapped:(id)sender {
     NSNumber *displayedlikeNumber = [[NSNumber alloc] init];
@@ -554,23 +575,6 @@
 }
 
 
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    if ([viewController isKindOfClass:[RankItemsViewController class]]){
-        RankItemsViewController *rankItemsViewController = (RankItemsViewController *) viewController;
-        NSMutableArray *sortedMarkerArrayByLike = [self sortMarkerArrayByLike:self.markerArray];
-        rankItemsViewController.markerArray = sortedMarkerArrayByLike;
-        
-        // NSMutableArray *sortedMarkerArrayBydislike = [self sortMarkerArrayByUnike:self.markerArray];
-        // rankItemsViewController.markerdislikeArray = sortedMarkerArrayBydislike;
-        
-        NSMutableArray *sortedMarkerArrayByLBWScore = [self sortMarkerArrayByLBWScore:self.markerArray];
-        rankItemsViewController.markerLBWScoreArray = sortedMarkerArrayByLBWScore;
-        
-        NSMutableArray *sortedMarkerArrayByBRating = [self sortMarkerArrayByBRating:self.markerArray];
-        rankItemsViewController.markerBRatingArray = sortedMarkerArrayByBRating;
-    }
-    return TRUE;
-}
 
 - (CGFloat)getBratingWithNumOfLikeForOneMarker: (NSInteger) numLike
               withNumOfDislikeForOneMarker: (NSInteger) numDislike {

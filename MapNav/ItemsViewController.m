@@ -32,22 +32,7 @@
     [self.tableView reloadData];
 }
 
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // Get the item for the selected row
-    Item *itemToShow = self.itemStore.allItems[indexPath.row];
-    
-    // Create a detail view controller
-    DetailViewController *dvc =
-    [[DetailViewController alloc] initWithItem:itemToShow
-                                  imageStore:self.imageStore];
-    
-    
-    // Push it onto the navigation stack
-    [self showViewController:dvc sender:self];
-}
-
+#pragma mark - items management
 
 - (instancetype)initWithItemStore:(ItemStore *)store imageStore:(ImageStore *)imageStore {
 // - (instancetype)initWithItemStore:imageStore {
@@ -75,6 +60,38 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [NSException raise:@"Wrong Initializer"
                 format:@"Use initWithItemStore: instead of initWithStyle:!"];
     return nil;
+}
+
+
+- (IBAction)addNewItem:(id)sender {
+    // Create a new item and add it to the store
+    Item *newItem = [self.itemStore createItem];
+    
+    // Figure out the item's index in the items array
+    NSInteger index = [self.itemStore.allItems indexOfObjectIdenticalTo:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection: 0];
+    
+    // Insert a row at this indexpath in the table
+    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];
+}
+
+#pragma mark - UITableView for photo gallery
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Get the item for the selected row
+    Item *itemToShow = self.itemStore.allItems[indexPath.row];
+    
+    // Create a detail view controller
+    DetailViewController *dvc =
+    [[DetailViewController alloc] initWithItem:itemToShow
+                                    imageStore:self.imageStore];
+    
+    
+    // Push it onto the navigation stack
+    [self showViewController:dvc sender:self];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -119,81 +136,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
-- (IBAction)setMarker:(id)sender {
-//    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
-//    VC1 *myVC1ref = (VC1 *)[self.tabBarController.viewControllers objectAtIndex:0];
-    
-     MapNavViewController *mapNavViewController = (MapNavViewController *)[self.tabBarController.viewControllers objectAtIndex:0];
-
-     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
-     Item *itemForCell = self.itemStore.allItems[indexPath.row];
-     double itemLongitude = itemForCell.longitude;
-     double itemLatitude = itemForCell.latitude;
-     NSString *itemName = itemForCell.name;
-     UIImage *itemImage = [self.imageStore imageForKey:itemForCell.itemKey];
-    [mapNavViewController setMarkerWithItemName:itemName
-                                withMarkerImage:itemImage
-                                  withLongitude:itemLongitude
-                                   withLatitude:itemLatitude];
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Load the ItemCell nib
-    UINib *itemCellNib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
-    
-    // Register this nib as the template for new ItemCells
-    [self.tableView registerNib:itemCellNib forCellReuseIdentifier:@"ItemCell"];    
-/*
-    UIButton *buttonSendResponse = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    buttonSendResponse.frame = CGRectMake(80, 300, 100, 40);
-    buttonSendResponse.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-
-    
-    [buttonSendResponse setTitle:NSLocalizedString(@"Set Markers", nil) forState:UIControlStateNormal];
-    [buttonSendResponse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    buttonSendResponse.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:186.0/255.0 blue:181.0/255.0 alpha:0.7];
-    buttonSendResponse.layer.cornerRadius = 4.0f;
-    buttonSendResponse.layer.masksToBounds = YES;
-    
-//    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
-//    [buttonSendResponse addTarget:mapNavViewController action:@selector(helloWorld:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    [mapNavViewController showMarker:buttonSendResponse];
-    
-    buttonSendResponse.showsTouchWhenHighlighted = YES;
-    [self.view addSubview:buttonSendResponse];
-    
-    UIImage *image = [UIImage imageNamed:@"MapMarker.png"];
-    ImageStore *setImageSize = [[ImageStore alloc] init];
-    self.tabBarItem.image = [setImageSize imageWithImage:image scaledToSize:CGSizeMake(30, 30)];
-    
-    if (self){
-        self.tabBarItem.title = @"Set Markers";
-        self.tabBarItem.image = [UIImage imageNamed:@"MapMarker.png"];
-    }
-*/
-}
-
-- (IBAction)helloWorld:(id)sender {
-    NSLog(@"Hello World!");
-}
-
-- (IBAction)addNewItem:(id)sender {
-    // Create a new item and add it to the store
-    Item *newItem = [self.itemStore createItem];
-    
-    // Figure out the item's index in the items array
-    NSInteger index = [self.itemStore.allItems indexOfObjectIdenticalTo:newItem];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection: 0];
-
-    // Insert a row at this indexpath in the table
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationTop];
-}
-
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath {
@@ -222,6 +164,35 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
+#pragma mark - method to set mark in mapView
+
+- (IBAction)setMarker:(id)sender {
+    //    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
+    //    VC1 *myVC1ref = (VC1 *)[self.tabBarController.viewControllers objectAtIndex:0];
+    
+    MapNavViewController *mapNavViewController = (MapNavViewController *)[self.tabBarController.viewControllers objectAtIndex:0];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
+    Item *itemForCell = self.itemStore.allItems[indexPath.row];
+    double itemLongitude = itemForCell.longitude;
+    double itemLatitude = itemForCell.latitude;
+    NSString *itemName = itemForCell.name;
+    UIImage *itemImage = [self.imageStore imageForKey:itemForCell.itemKey];
+    [mapNavViewController setMarkerWithItemName:itemName
+                                withMarkerImage:itemImage
+                                  withLongitude:itemLongitude
+                                   withLatitude:itemLatitude];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Load the ItemCell nib
+    UINib *itemCellNib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
+    
+    // Register this nib as the template for new ItemCells
+    [self.tableView registerNib:itemCellNib forCellReuseIdentifier:@"ItemCell"];
+}
 
 @end
 

@@ -33,6 +33,19 @@
    BOOL firstLocationUpdate_;
 }
 
+#pragma mark - textField for keyboard
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+- (IBAction)backgroundTapped:(id)sender {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Take picture and mark current location
+
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -49,16 +62,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
-}
-
-
-- (IBAction)backgroundTapped:(id)sender {
-    [self.view endEditing:YES];
-}
-
 - (void)takePicture {
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     
@@ -73,26 +76,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     ipc.delegate = self;
     
+    /*
+    [self presentViewController:ipc animated:YES completion:^{
+        //iOS 8 bug.  the status bar will sometimes not be hidden after the camera is displayed, which causes the preview after an image is captured to be black
+        if (ipc.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+        }
+    }];
+    */
+    
+    
     // put the image picker on the screen
     [self presentViewController:ipc animated:YES completion:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    // Clear first responder
-    [self.view endEditing:YES];
-    
-    // Update the item with the text field contents
-    self.item.name = self.nameField.text;
-    self.item.likeNumber = self.likeNumberField.text;
-    self.item.longitude = [self.longitudeField.text doubleValue];
-    self.item.latitude = [self.latitudeField.text doubleValue];
-}
 
 // do a mapViewController and use the 
 - (IBAction)pictureButtonPressed:(UIBarButtonItem *)sender {
-    [self takePicture];
 //    MapNavViewController *mapNavViewController = [[MapNavViewController alloc] init];
 //    CLLocation *myLocation = [mapNavViewController getLocationForNewMarker];
     
@@ -109,31 +109,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [NSString stringWithFormat:@"%f", self.item.longitude];
     self.latitudeField.text =
     [NSString stringWithFormat:@"%f", self.item.latitude];
-}
-
-
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    // import values from the current item to the UI
-    self.nameField.text = self.item.name;
-    self.likeNumberField.text = self.item.likeNumber;
-    self.longitudeField.text =
-    [NSString stringWithFormat:@"%f", self.item.longitude];
-    self.latitudeField.text =
-    [NSString stringWithFormat:@"%f", self.item.latitude];
-    
-    // represent the date created legibly
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    self.dateLabel.text = [dateFormatter stringFromDate:self.item.dateCreated];
-    
-    // Display the items image, if there is one for it in the image store
-    UIImage *itemImage = [self.imageStore imageForKey:self.item.itemKey];
-    self.imageView.image = itemImage;
+    [self takePicture];
 }
 
 
@@ -149,31 +125,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38.5382
-                                                            longitude:-121.7617
-                                                                 zoom:40];
-    
-    
-    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    mapView_.myLocationEnabled = YES;
-    
-    /*
-    // Listen to the myLocation property of GMSMapView.
-    [mapView_ addObserver:self
-               forKeyPath:@"myLocation"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-    
-    */
-    
-    // Ask for My Location data after the map has already been added to the UI.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        mapView_.myLocationEnabled = YES;
-    });
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -189,6 +141,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // Pass the selected object to the new view controller.
 }
 */
+
+
+#pragma mark - GoogleMap API, enable current location
 
 - (void)enableMyLocation
 {
@@ -242,5 +197,68 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     }
 }
 
+
+#pragma mark - viewDidLoad, viewDidAppear, viewWillDisappear
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38.5382
+                                                            longitude:-121.7617
+                                                                 zoom:40];
+    
+    
+    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.myLocationEnabled = YES;
+    
+    /*
+     // Listen to the myLocation property of GMSMapView.
+     [mapView_ addObserver:self
+     forKeyPath:@"myLocation"
+     options:NSKeyValueObservingOptionNew
+     context:NULL];
+     
+     */
+    
+    // Ask for My Location data after the map has already been added to the UI.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        mapView_.myLocationEnabled = YES;
+    });
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // import values from the current item to the UI
+    self.nameField.text = self.item.name;
+    self.likeNumberField.text = self.item.likeNumber;
+    self.longitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.longitude];
+    self.latitudeField.text =
+    [NSString stringWithFormat:@"%f", self.item.latitude];
+    
+    // represent the date created legibly
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    self.dateLabel.text = [dateFormatter stringFromDate:self.item.dateCreated];
+    
+    // Display the items image, if there is one for it in the image store
+    UIImage *itemImage = [self.imageStore imageForKey:self.item.itemKey];
+    self.imageView.image = itemImage;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Clear first responder
+    [self.view endEditing:YES];
+    
+    // Update the item with the text field contents
+    self.item.name = self.nameField.text;
+    self.item.likeNumber = self.likeNumberField.text;
+    self.item.longitude = [self.longitudeField.text doubleValue];
+    self.item.latitude = [self.latitudeField.text doubleValue];
+}
 
 @end

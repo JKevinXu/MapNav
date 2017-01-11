@@ -39,6 +39,8 @@
     return [self.items copy];
 }
 
+#pragma mark - items creation, deletion and moving
+
 - (Item *)createItem {
 //    Item *newItem = [Item randomItem];
     Item *newItem = [Item new];
